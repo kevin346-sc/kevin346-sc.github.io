@@ -120,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clb32g42w0006uguy64xh0kyb" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clb4bysfc0007oouy6pnqfpw7" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -171,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clb32g4300009uguyczhn2686" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clb4bysff0009oouy8s5k33y6" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -424,11 +424,34 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    static bool cmp(const vector&lt;int&gt;&amp; a, const vector&lt;int&gt;&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        return a[0] &lt; b[0];</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; merge(vector&lt;vector&lt;int&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        if (intervals.size() == 1) return intervals;</span><br><span class="line">        sort(intervals.begin(), intervals.end(), cmp);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res;</span><br><span class="line">        int st = intervals[0][0], en = intervals[0][1];</span><br><span class="line">        for (int i = 0; i &lt; intervals.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (en &gt;= intervals[i][0]) // 有重叠</span><br><span class="line">            &#123;</span><br><span class="line">                en = max(intervals[i][1], en);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(vector&lt;int&gt; &#123;st, en&#125;);</span><br><span class="line">                st = intervals[i][0];</span><br><span class="line">                en = intervals[i][1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.push_back(vector&lt;int&gt; &#123;st,en&#125;);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h3 id="总结-13"><a href="#总结-13" class="headerlink" title="总结"></a>总结</h3><p>该题与<a href="#%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4">无重叠区间</a>相比有相反的感觉，都是要找到重叠区间的部分，但后者是优先寻找到范围更小的区间，是为了减少重叠的可能性；而这题是要优先找到范围更大的区间，就是为了要尽可能多的重叠区间。也因此，<strong>要根据不同的目的，针对不同排序方式下选用不同的遍历顺序</strong></p>
+<h2 id="单调递增的数字"><a href="#单调递增的数字" class="headerlink" title="单调递增的数字"></a>单调递增的数字</h2><p>该题要求返回小于等于给定输入的尽可能大的数，并且返回值按位非严格递增，如给定<code>98</code>则返回<code>89</code></p>
+<h3 id="贪心-9"><a href="#贪心-9" class="headerlink" title="贪心"></a>贪心</h3><p>要求返回的数尽可能大，那么局部最优在于先从低位修改，这也确定了遍历顺序是从右往左，如果<code>num[i]</code>大于<code>num[i+1]</code>，不符合按位递增规则，则<code>num[i]--; num[i+1]=&#39;9&#39;;</code>。但是如果给定输入为<code>1000</code>，只修改为<code>900</code>，而原本应该为<code>999</code>，因此，需要另外借助变量记录开始修改为9的位置，即<code>i+1</code>处，在<code>i+1</code>往后的位置都应该赋值为9</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int monotoneIncreasingDigits(int n) &#123;</span><br><span class="line">        string num = to_string(n);</span><br><span class="line">        int flag = num.size();</span><br><span class="line">        for (int i = num.size() - 1; i &gt; 0; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            if (num[i -1] &gt; num[i])</span><br><span class="line">            &#123;</span><br><span class="line">                num[i - 1]--;</span><br><span class="line">                flag = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = flag; i &lt; num.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            num[i] = &#x27;9&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        return stoi(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>时间复杂度为O(log n)，n为输入的数，log n对应其位数，空间复杂度为O(log n)，占用log n的空间来存放数的每一位</p>
+<h3 id="总结-14"><a href="#总结-14" class="headerlink" title="总结"></a>总结</h3><p>贪心策略在于 <strong>为了取到最大值，从数的低位开始修改</strong>，这就确定了从右往左的遍历顺序；还需要有标志位来记录需要变为9的所有位置</p>
+<h2 id="买卖股票最佳时机I"><a href="#买卖股票最佳时机I" class="headerlink" title="买卖股票最佳时机I"></a><strong>买卖股票最佳时机I</strong></h2><p>与[同系列的上一题](# 买卖股票最佳时机II)相比，该题还增加了手续费，相当于限制了买卖次数，需要找到除去手续费后的最大利润，而不能像上一题那样无限制买入卖出</p>
+<h3 id="贪心-10"><a href="#贪心-10" class="headerlink" title="贪心"></a>贪心</h3><p>思路依旧还是 希望能够在最低点买入，然后在最高点卖出，而因为有了手续费，还会有新的情况需要考虑到：<strong>如何知道当前点是最高点</strong></p>
+<p>贪心策略就是用于解决这个问题，首先遍历寻找最低点进行买入，并维护<code>buy = prices[l]+fee</code>，此时<code>l</code>为最低点，如果遍历到该点利润大于零，可以虚拟地卖出了这只股票，利润值增加<code>profit += prices[sh] - buy = prices[sh] - prices[l] -fee</code>，此时<code>sh</code>为次高点，并且已经扣除了手续费，模拟在这个次高点虚拟卖出，同时还要更新买入价格为 <strong>当前股票价格</strong>，即<code>buy = prices[sh]</code>，如此一来，当遍历到下一个点发现股票价格还在上涨时<code>prices[h]&gt;prices[sh]</code>，则又虚拟的假设成在这个最高点上卖出了股票，由于买入价格的更新，利润值更新为<code>profit += prices[h] - buy = prices[h] -prices[sh] </code>，可以看出，根据这时候获得的利润，可以模拟出<strong>最低点买入而在最高点卖出</strong>的过程</p>
+<p>整体代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices, int fee) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        int buy = prices[0] + fee;</span><br><span class="line">        for(int i = 0; i &lt; prices.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(prices[i]+fee &lt; buy)</span><br><span class="line">                buy = prices[i] + fee;</span><br><span class="line">            else if(prices[i] &gt; buy)</span><br><span class="line">            &#123;</span><br><span class="line">                res += prices[i] - buy;</span><br><span class="line">                buy = prices[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
+<p>相同思路，而不必将<code>buy</code>维护成最低买入点与手续费的和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices, int fee) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        int buy = prices[0];</span><br><span class="line">        for(int i = 0; i &lt; prices.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(prices[i] &lt; buy)</span><br><span class="line">                buy = prices[i] ;</span><br><span class="line">            else if(prices[i] &gt; buy + fee)</span><br><span class="line">            &#123;</span><br><span class="line">                res += prices[i] - buy - fee;</span><br><span class="line">                buy = prices[i]-fee;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-15"><a href="#总结-15" class="headerlink" title="总结"></a>总结</h3><p>贪心策略在该题中体现在 <strong>遇到次高点时虚拟的卖出，更新利润的同时也更新买入价格，即虚拟地在该点买入</strong>，这也是局部最优的所在</p>
+<p>遍历数组的时候，会有以下三种情况：</p>
+<ul>
+<li>该点比买入点更低，则更新买入的最低点</li>
+<li>该点比买入点和手续费的和更高，即利润大于0，此时虚拟地卖出，更新利润以及更新买入点，也为后续更高点准备</li>
+<li>该点在<code>[低买入点+手续费，高卖出点]</code>范围，即没有利润，则此时不会卖出，不进行任何操作</li>
+</ul>
+<h2 id="监控二叉树"><a href="#监控二叉树" class="headerlink" title="监控二叉树"></a><strong>监控二叉树</strong></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb32g42r0003uguy82gwbqdo" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb4bysf20002oouyf4bi21dp" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -830,7 +853,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clb32g42h0000uguyhmesgxva" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clb4byseu0000oouyc9alhijn" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1204,7 +1227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb32g42o0001uguyh0t4abxe" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb4bysfa0006oouy2786fl9z" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3205,7 +3228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clb32g42q0002uguygnax7sbc" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clb4bysf00001oouy5rij9ug9" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -3876,7 +3899,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clb32g42u0005uguy64vg3n95" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clb4bysf60004oouye1tud7q2" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3915,7 +3938,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clb32g42z0008uguye3ds95jy" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clb4bysfd0008oouycf728qzt" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
