@@ -72,6 +72,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DP章节" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/02/DP%E7%AB%A0%E8%8A%82/" class="article-date">
+  <time class="dt-published" datetime="2022-12-02T09:23:42.000Z" itemprop="datePublished">2022-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/12/02/DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="DP模板"><a href="#DP模板" class="headerlink" title="DP模板"></a>DP模板</h2><ol>
+<li>确定数组<code>dp[i]</code>的含义，以及下标<code>i</code>的含义</li>
+<li>确定数组<code>dp[i]</code>的递推公式</li>
+<li>确定数组<code>dp[i]</code>的初始值</li>
+<li>确定遍历顺序</li>
+<li>举例推导</li>
+</ol>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>容易想到递归的方法来实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n&lt;=1)</span><br><span class="line">            return n;</span><br><span class="line">        return fib(n-1) + fib(n-2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n!)，空间复杂度为O(n)</p>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>DP数组的含义是<code>i</code>位置的斐波那契数列值是<code>dp[i]</code></p>
+<p>递推公式为<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
+<p>DP数组初始值<code>dp[0]=0,dp[1]=1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        vector&lt;int&gt; vec(n+1);</span><br><span class="line">        vec[0] = 0;</span><br><span class="line">        vec[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            vec[i] = vec[i - 1] + vec[i - 2];</span><br><span class="line">        &#125;</span><br><span class="line">        return vec[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(n)</p>
+<h3 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h3><p>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，则可以不需要借助容器<code>vector</code>来记录，而是只用两个变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        int v0 = 0, v1 = 1;</span><br><span class="line">        int sum = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = v0 + v1;</span><br><span class="line">            v0 = v1;</span><br><span class="line">            v1 = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        return v1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助两个变量来完成</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clb7xpbzj0001couyhqzk4rne" data-title="DP章节" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-create_blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/29/create_blog/" class="article-date">
@@ -120,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clb602qqf0005eguyemgs0rwh" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clb7xpbzt0007couy36cxduc6" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -171,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clb602qqj0007eguygao532wi" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clb7xpbzp0003couyb1xa97v4" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -447,11 +507,13 @@
 <li>该点比买入点和手续费的和更高，即利润大于0，此时虚拟地卖出，更新利润以及更新买入点，也为后续更高点准备</li>
 <li>该点在<code>[低买入点+手续费，高卖出点]</code>范围，即没有利润，则此时不会卖出，不进行任何操作</li>
 </ul>
-<h2 id="监控二叉树"><a href="#监控二叉树" class="headerlink" title="监控二叉树"></a><strong>监控二叉树</strong></h2>
+<h2 id="监控二叉树"><a href="#监控二叉树" class="headerlink" title="监控二叉树"></a><strong>监控二叉树</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minCameraCover(TreeNode* root) &#123;</span><br><span class="line">        if(!root-&gt;left &amp;&amp; !root-&gt;right) return 1;</span><br><span class="line">        int res = 1;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;//还要存父结点</span><br><span class="line">        //层序遍历</span><br><span class="line">        TreeNode* pre, *cur;</span><br><span class="line">        que.push(nullptr);</span><br><span class="line">        que.push(root);</span><br><span class="line">        while(!que.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            for(int i = 0; i &lt; que.size(); i++)</span><br><span class="line">            &#123;</span><br><span class="line">                pre = que.front();</span><br><span class="line">                que.pop();</span><br><span class="line">                cur = que.front();</span><br><span class="line">                que.pop();</span><br><span class="line"></span><br><span class="line">                if(pre &amp;&amp; pre-&gt;val == 0 &amp;&amp; (cur-&gt;left||cur-&gt;right))</span><br><span class="line">                &#123;</span><br><span class="line">                    res++;</span><br><span class="line">                    cur-&gt;val = 1;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if(cur-&gt;left)</span><br><span class="line">                &#123;</span><br><span class="line">                    que.push(cur);</span><br><span class="line">                    que.push(cur-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                if(cur-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    que.push(cur);</span><br><span class="line">                    que.push(cur-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb602qqc0002eguy8utx69ep" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb7xpbzu0009couy27zl9tqs" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -853,7 +915,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clb602qq30000eguy9xbgawas" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clb7xpbze0000couy7nkx0jno" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1227,7 +1289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb602qq90001eguyg8uq5h4e" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb7xpbzs0005couy8pzne6ay" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3228,7 +3290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clb602qqe0004eguy9wvn13md" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clb7xpbzo0002couyat1q7ro6" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -3899,7 +3961,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clb602qqd0003eguy2tvh844h" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clb7xpbzs0006couy8vny8lqo" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3938,7 +4000,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clb602qqm0009eguy0p7m8gl2" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clb7xpbzv000acouy0qeb4on4" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
@@ -3982,7 +4044,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li></ul>
     </div>
   </div>
 
@@ -3993,6 +4055,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/12/02/DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+          </li>
         
           <li>
             <a href="/2022/11/29/create_blog/">(no title)</a>
@@ -4008,10 +4074,6 @@
         
           <li>
             <a href="/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/">C3P第三部分</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/">LeetCode回溯算法章节</a>
           </li>
         
       </ul>
