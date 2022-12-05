@@ -120,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clb8mu1q10002acuy6zl36z00" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clba3gcqh0001d4uy6bqz6veq" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -180,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clb8mu1q80007acuy68vk9btq" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clba3gcqr0007d4uy5rb8fndl" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -231,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clb8mu1qd000aacuygzohcrzi" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clba3gcqt0009d4uybfb13loy" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -513,14 +513,24 @@
 
 <p>然而，这种方法下，当遇到的二叉树<strong>添加监控的结点的孙子结点是叶子结点时，则无法做到监控的全覆盖</strong></p>
 <h3 id="贪心-11"><a href="#贪心-11" class="headerlink" title="贪心"></a>贪心</h3><p>采用贪心策略，局部最优在于<strong>为了添加的监控数量最少，则只给叶子结点的父结点添加监控</strong></p>
-<p>针对以上，结点值会有三种状态：0表示无覆盖，1表示有监控，2表示被覆盖。增加结点值为 2 是为了方便表示叶子结点等的状态，进而，二叉树的遍历顺序也应改为后序遍历，先遍历子结点再遍历中间结点，由下至上的遍历顺序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	int dfs(TreeNode* node, int res)</span><br><span class="line">	&#123;</span><br><span class="line">		if(!node)		//遇到空结点应返回2</span><br><span class="line">			return 2;</span><br><span class="line">	&#125;</span><br><span class="line">    int minCameraCover(TreeNode* root) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>针对以上，结点值会有三种状态：<strong>0表示无覆盖，1表示有监控，2表示被覆盖</strong>。增加结点值为 2 是为了方便表示叶子结点等的状态，进而，二叉树的遍历顺序应为<strong>后序遍历</strong>，先遍历子结点再遍历中间结点，由下至上的遍历顺序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	int dfs(TreeNode* node, int&amp; res)</span><br><span class="line">	&#123;</span><br><span class="line">		if(!node)		//遇到空结点应返回2</span><br><span class="line">			return 2;</span><br><span class="line">		int l = dfs(node-&gt;left, res);</span><br><span class="line">		int r = dfs(node-&gt;right, res);</span><br><span class="line">		</span><br><span class="line">		if(l == 2 &amp;&amp; r == 2)</span><br><span class="line">         	return 0;</span><br><span class="line">         if(l == 0 || r == 0)</span><br><span class="line">         &#123;</span><br><span class="line">         	res++;</span><br><span class="line">         	return 1;</span><br><span class="line">         &#125;</span><br><span class="line">         if(l == 1 || r == 1)</span><br><span class="line">         	return 2;</span><br><span class="line">         </span><br><span class="line">         return -1;</span><br><span class="line">	&#125;</span><br><span class="line">    int minCameraCover(TreeNode* root) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        if(dfs(root, res) == 0)</span><br><span class="line">        	res++;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="总结-16"><a href="#总结-16" class="headerlink" title="总结"></a>总结</h3>
+<p>时间复杂度为O(n)，空间复杂度为O(log n)，最坏情况下为O(n)</p>
+<p>因为后序遍历中，中间结点的处理情况需要用到其左右子结点的值来判断，因此，<strong>将当前结点的值作为递归函数的返回值</strong>。</p>
+<p>根据左右子结点的值来判断当前当前结点的值，有四种情况：</p>
+<ul>
+<li>左右子结点都是有覆盖，则当前结点返回0，表示无覆盖</li>
+<li>左右子结点有任意一个无覆盖，则当前结点应添加监控，返回1</li>
+<li>左右子结点有任意一个有监控，则当前结点返回2，表示有覆盖</li>
+<li>在对除根结点外的所有结点遍历结束后，对于根结点，可能会出现根结点未覆盖的情况，因此还需要对根结点的返回值进行一次判断，若返回0则需要再添加一个监控</li>
+</ul>
+<h3 id="总结-16"><a href="#总结-16" class="headerlink" title="总结"></a>总结</h3><p>该题中局部最优在于 <strong>不让叶子结点添加监控，而让叶子结点的父结点添加监控</strong>，在此基础上，推导出3种不同结点值的状况，并进行分类讨论</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb8mu1q60005acuy2hwrbhqt" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clba3gcqs0008d4uy7f5aaktu" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -922,7 +932,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clb8mu1ps0000acuy4oxx2yd4" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clba3gcqc0000d4uy1ojsd6f0" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1188,7 +1198,7 @@
 <p>直观的用<code>used</code>数组表示原始数组中的每一个值是否使用过，是对全排列的进一步改进。不只是加上直接加上<strong>排序后再判断当前值与前一值是否相等的</strong>去重操作，为了防止树枝上的多余去重，额外增加了<code>&amp;&amp;used[i-1]==false</code>，限定了只在树层上去重，而不影响树枝上对等值元素的取用</p>
 <h3 id="总结-10"><a href="#总结-10" class="headerlink" title="总结"></a>总结</h3><p>在全排列的基础上，只增加<code>if(i&gt;0 &amp;&amp; nums[i]==nums[i-1])	continue;</code>语句会导致竖向上首元素会被重复加入（因为i从0开始），而语句本意是跳过横向重复结点和跳过已加入的竖向重复结点，因此，要么选择再增加对跳过竖向结点的限制，如[回溯2](# 回溯2)用额外<code>used</code>数组记录每个元素是否被访问过，如果前一个元素未被访问<code>nums[i-1]==false</code>，且满足当前元素与前一个元素相同<code>i&gt;0 &amp;&amp; nums[i]==nums[i-1]</code>，证明这是在横向上的重复结点（树层），应当跳过，而竖向上如果再次访问访问过的结点<code>used[i]==true</code>，则会执行跳过，不重复加入结果中（另一个角度，如果在满足当前元素与前一个元素相同<code>i&gt;0 &amp;&amp; nums[i]==nums[i-1]</code>时，前一个元素被访问过<code>nums[i-1]==true</code>，此时当前元素也可以被跳过，保留的是横向上的结点，而竖向重复结点被跳过）；要么在<code>if(i&gt;0 &amp;&amp; nums[i]==nums[i-1])	continue;</code>语句不能跳过已加入的竖向重复结点和横向重复结点的情况下，限制加入的重复结点数量如[回溯1](# 回溯1)用<code>used</code>数组记录每一个结点的数量，那么当i从开始时，只会最多加入原数组数量的元素，一旦超过就会被跳过。以上两种算法过程都如下图，</p>
 <p><img src="/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/%E5%85%A8%E6%8E%92%E5%88%97.png"></p>
-<h2 id="重新安排行程"><a href="#重新安排行程" class="headerlink" title="重新安排行程"></a>重新安排行程</h2><h3 id="回溯-10"><a href="#回溯-10" class="headerlink" title="回溯"></a>回溯</h3><p>本题中，关键点在于</p>
+<h2 id="重新安排行程"><a href="#重新安排行程" class="headerlink" title="重新安排行程"></a><strong>重新安排行程</strong></h2><h3 id="回溯-10"><a href="#回溯-10" class="headerlink" title="回溯"></a>回溯</h3><p>本题中，关键点在于</p>
 <ul>
 <li>记录出发机场和目标机场的容器，同时还要记录是否访问过，防止死循环</li>
 <li>回溯的终止条件，因为一定存在合理路径，所以机票数+1 &#x3D; 机场数</li>
@@ -1221,7 +1231,7 @@
 <p>按字典序从<code>priority_queue</code>中访问目标机场，对新访问的机场进行深度有限搜索，并删除访问过的机场，直到该机场是最后一个机场，则添加到数组当中，再不断返回，将之前访问过的机场也添加到数组中，最后将数组逆序即为结果集</p>
 <h3 id="总结-11"><a href="#总结-11" class="headerlink" title="总结"></a>总结</h3><p>该题巧妙选择容器，记录复杂的信息，用<code>unordered_map</code>记录出发机场和目标机场，是因为不需要对出发机场进行排序，为了减少开销，用<code>map&lt;string,int&gt;</code>按字典序记录目标机场及机票数，不使用<code>multiset</code>单纯记录目标机场，就是为了防止同一张机票的重复访问，防止死循环</p>
 <p>在第二种解法中，使用不用的容器来记录，通过优先队列来按字典序记录目标机场，每次访问只需要<code>p.top()</code>，访问时间复杂度是O(1)，删除的时间复杂度是O(logm)</p>
-<h2 id="破解保险箱"><a href="#破解保险箱" class="headerlink" title="破解保险箱"></a>破解保险箱</h2><h2 id="N皇后"><a href="#N皇后" class="headerlink" title="N皇后"></a>N皇后</h2><p>[N皇后](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后 - 力扣（LeetCode）</a>)</p>
+<h2 id="破解保险箱"><a href="#破解保险箱" class="headerlink" title="破解保险箱"></a>破解保险箱</h2><h2 id="N皇后"><a href="#N皇后" class="headerlink" title="N皇后"></a><strong>N皇后</strong></h2><p>[N皇后](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后 - 力扣（LeetCode）</a>)</p>
 <p>要求在<code>n*n</code>的棋盘上放置n个皇后，并且皇后互相不能攻击，即同行同列包括斜角线上不能有两个皇后</p>
 <p>逐行遍历棋盘，因为只需要在一行中摆放一个皇后，则不需要两层循环遍历，同时还要有判断是否冲突的函数</p>
 <p>首先，根据规则判断在该位置上放置皇后是否会被攻击</p>
@@ -1254,7 +1264,7 @@
 <li>回溯不需要返回值，是因为要寻找<strong>所有可行的棋盘摆放</strong>，应当<strong>用全局变量或者引用返回</strong>，同时要遍历所有情况；若只需要找到<strong>一种可行的棋盘</strong>，则返回值应为**<code>bool</code><strong>，一旦找到则</strong>返回<code>true</code>退出递归**</li>
 <li>不需要对同行皇后进行判断，是因为对<strong>同行位置进行遍历时，肯定不会发生同一行同时有两个皇后出现</strong>，一旦某一个位置能够摆放皇后，就会马上<strong>进入到下一层递归</strong>，即到下一行的遍历，而后面回溯回本行时，又会将原位置的皇后删除，再从下一位进行遍历</li>
 </ul>
-<h2 id="解数独"><a href="#解数独" class="headerlink" title="解数独"></a>解数独</h2><p>[解数独](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">37. 解数独 - 力扣（LeetCode）</a>)</p>
+<h2 id="解数独"><a href="#解数独" class="headerlink" title="解数独"></a><strong>解数独</strong></h2><p>[解数独](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">37. 解数独 - 力扣（LeetCode）</a>)</p>
 <p>与上题<a href="#N%E7%9A%87%E5%90%8E">N皇后</a>相比，解数独也是在一个二维棋盘上，但不仅要判断该点是否会有冲突，还要在遍历时在每个点上都要填充数字，也就是说，不能像上题一样，如果是单层循环，填完该位置上的数字就进入递归，遍历下一行。因此需要两层循环，填完数字后进入递归，还是从刚填过的位置开始继续填。</p>
 <p>同样，首先需要根据规则判断是否有冲突</p>
 <ul>
@@ -1292,11 +1302,23 @@
 <li>递归需要返回值，题目保证能找到一个有效的解决方案，且最多只有一个解，因此返回bool值，当找到时，即遍历完棋盘，就返回true；当在棋盘上某一个点遍历完9个数字都没有合适结果时，应当返回false，令上一层递归进行回溯。也就是说，有返回值如bool类型，可以通过判断返回值（如果为真）可以避免进一步递归，同时还能让进入多余分支的递归及时退出，防止了死循环（如本题，在没有递归结束条件的情况下，如果不用返回值限制则会导致死循环）；而无返回值的通常是要遍历所有分支，从中找到所有解</li>
 <li>一次循环即可完成对数独是否有效的判断，借助哈希表，将一维的数据通过二维的哈希表进行重复性判断</li>
 </ul>
+<h2 id="最接近目标价格的甜点成本"><a href="#最接近目标价格的甜点成本" class="headerlink" title="最接近目标价格的甜点成本"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/closest-dessert-cost/">最接近目标价格的甜点成本</a></h2><p>该题要求从必选数组<code>base</code>中选择一份基料，以及从可选数组<code>topping</code>中选择0份、1份或者2份配料，组成的冰淇淋总价格最接近<code>target</code>且成本最低</p>
+<h3 id="回溯-13"><a href="#回溯-13" class="headerlink" title="回溯"></a>回溯</h3><p>容易想到，给定数据量较少，可以用回溯算法对数组进行遍历，用<code>set</code>保存可行的方案，并最终选择最合适的一个价格返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    set&lt;int&gt; vec;</span><br><span class="line">    void traceback(vector&lt;int&gt;&amp; toppingCosts, int target, int index, int res)</span><br><span class="line">    &#123;</span><br><span class="line">        if (index == toppingCosts.size())</span><br><span class="line">        &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = index; i &lt; toppingCosts.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            res += toppingCosts[i];</span><br><span class="line">            vec.insert(res);</span><br><span class="line">            traceback(toppingCosts, target, i + 1, res);</span><br><span class="line">            res += toppingCosts[i];</span><br><span class="line">            vec.insert(res);</span><br><span class="line">            traceback(toppingCosts, target, i + 1, res);</span><br><span class="line">            res -= toppingCosts[i] * 2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int closestCost(vector&lt;int&gt;&amp; baseCosts, vector&lt;int&gt;&amp; toppingCosts, int target) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        //int m = toppingCosts.size();</span><br><span class="line">        //for (int i = 0; i &lt; m; i++)</span><br><span class="line">        //&#123;</span><br><span class="line">        //    toppingCosts.push_back(toppingCosts[i]);</span><br><span class="line">        //&#125;</span><br><span class="line">        for (int i = 0; i &lt; baseCosts.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            res = baseCosts[i];</span><br><span class="line">            vec.insert(res);</span><br><span class="line">            traceback(toppingCosts, target, 0, res);</span><br><span class="line">        &#125;</span><br><span class="line">        int ans = INT_MAX;</span><br><span class="line">        for (auto it: vec)</span><br><span class="line">        &#123;</span><br><span class="line">            if (abs(target - it) &lt; abs(ans - target))</span><br><span class="line">                ans = it;</span><br><span class="line">            else if(abs(target - it == abs(ans-target)))</span><br><span class="line">                ans = it &lt; ans? it:ans;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><del>因为最多可以添加两份配料，则将原数组<code>topping</code>中的元素都复制一遍，再进行回溯</del>，但会超时</p>
+<p>则可以对数组<code>topping</code>中的同一个元素进行两次回溯递归，分别将一份和两份配料的价格传递到递归当中</p>
+<p>无论价格是多少，都会被存入到<code>set</code>当中，因为难以在存入结果之前对结果的合法性进行判断，所以只能被动地存入所有结果，最后在遍历所有结果的时候，选取最合适的结果</p>
+<h3 id="回溯优化-4"><a href="#回溯优化-4" class="headerlink" title="回溯优化"></a>回溯优化</h3><p>优化在只需要用O(1)的空间存储结果，存储的不再是所有结果，而是最合适的结果，并对其进行维护</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int ans = INT_MAX;</span><br><span class="line">    void traceback(vector&lt;int&gt;&amp; toppingCosts, int target, int index, int res)</span><br><span class="line">    &#123;</span><br><span class="line">        if (abs(target-ans) &gt; abs(res-target))</span><br><span class="line">            ans = res;</span><br><span class="line">        if(abs(target-ans) == abs(res-target) &amp;&amp; res &lt; ans )</span><br><span class="line">            ans = res;</span><br><span class="line">        if(res &gt; target)</span><br><span class="line">            return;</span><br><span class="line">        for (int i = index; i &lt; toppingCosts.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            traceback(toppingCosts, target, i + 1, res + toppingCosts[i]);</span><br><span class="line">            traceback(toppingCosts, target, i + 1, res+ 2 * toppingCosts[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int closestCost(vector&lt;int&gt;&amp; baseCosts, vector&lt;int&gt;&amp; toppingCosts, int target) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        for (int i = 0; i &lt; baseCosts.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            res = baseCosts[i];</span><br><span class="line">            traceback(toppingCosts, target, 0, res);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-14"><a href="#总结-14" class="headerlink" title="总结"></a>总结</h3><p><strong>回溯算法的题目要注意回溯参数<code>i</code>与 <code>index</code>，如果是<code>i</code>，则是允许元素重复加入结果集，在本题中，使用<code>i</code>作为参数传递而不是<code>i+1</code>，则意味着可以使用任意数量的配料<code>topping</code>，不符合题意；添加元素到结果集时，向递归函数传递的参数永远都是<code>i</code>而不是<code>index</code></strong></p>
+<p><strong>因为有必选数组和可选数组的存在，对必选数组进行<code>for</code>循环遍历，再进行回溯，保证结果集中有必选数组的元素；而必选数组中又可以对不同数量的元素重复使用（同一个元素最多两次），则可以通过两次回溯调用来实现</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clb8mu1qa0008acuyagg0fq7m" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clba3gcqm0003d4uyg1gcawha" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3297,7 +3319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clb8mu1py0001acuydkqdhoyk" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clba3gcqk0002d4uyaiprhjmj" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -3968,7 +3990,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clb8mu1q70006acuydehn6q0b" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clba3gcqq0006d4uy0clt8djt" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -4007,7 +4029,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clb8mu1qc0009acuy7u9fe3mb" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clba3gcqv000ad4uy7zw75sr4" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
