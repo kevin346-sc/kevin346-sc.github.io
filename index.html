@@ -111,6 +111,90 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        vector&lt;int&gt; vec(n+1);</span><br><span class="line">        vec[0] = 0;</span><br><span class="line">        vec[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            vec[i] = vec[i - 1] + vec[i - 2];</span><br><span class="line">        &#125;</span><br><span class="line">        return vec[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>时间复杂度为O(n)，空间复杂度为O(n)</p>
+<h3 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h3><p>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，则可以不需要借助容器<code>vector</code>来记录，而是只用三个变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        int v0 = 0, v1 = 1;</span><br><span class="line">        int sum = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = v0 + v1;</span><br><span class="line">            v0 = v1;</span><br><span class="line">            v1 = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        return v1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助三个变量来完成</strong></p>
+<h2 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">爬楼梯</a></h2><p>该题允许向上攀爬一个或两个台阶，返回n级台阶总共有多少种不同的攀爬方法</p>
+<h3 id="DP思路"><a href="#DP思路" class="headerlink" title="DP思路"></a>DP思路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当n为1时，有1种方式</span><br><span class="line">当n为2时，有2种方式</span><br><span class="line">当n为3时，有3种方式</span><br><span class="line">当n为4时，有5种方式</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，当阶数为n时，是<code>n-1</code>和<code>n-2</code>级阶数方法的总和</p>
+<ul>
+<li><p>确定DP数组含义</p>
+<p><code>DP[i]</code>表示在台阶<code>i</code>时的攀爬方法</p>
+</li>
+<li><p>确定递推公式</p>
+<p><code>DP[i] = DP[i - 1] + DP[i - 2];</code></p>
+</li>
+<li><p>确定初始值</p>
+<p><code>DP[1] = 1, DP[2] = 2</code></p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>遍历顺序为正序，从头到尾遍历数组</p>
+</li>
+</ul>
+<h3 id="DP-1"><a href="#DP-1" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int climbStairs(int n) &#123;</span><br><span class="line">        if(n &lt;= 3)  return n;</span><br><span class="line">        int res = 0;</span><br><span class="line">        vector&lt;int&gt; dp(n+1);</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        dp[2] = 2;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = dp[i-1] + dp[i-2];</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DP优化-1"><a href="#DP优化-1" class="headerlink" title="DP优化"></a>DP优化</h3><p>与[上一题](# DP优化)优化方式类似，<strong>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，因此可以使用滚动数组实现</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int climbStairs(int n) &#123;</span><br><span class="line">        if(n &lt;= 3)  return n;</span><br><span class="line">        int res = 0;</span><br><span class="line">        int q = 1, w = 2, e = 3;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            e = q + w;</span><br><span class="line">            q = w;</span><br><span class="line">            w = e;</span><br><span class="line">        &#125;</span><br><span class="line">        return e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助三个变量来完成</strong></p>
+<h2 id="使用最小花费爬楼梯"><a href="#使用最小花费爬楼梯" class="headerlink" title="使用最小花费爬楼梯"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">使用最小花费爬楼梯</a></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9h0001uouy2i9vgdix" data-title="DP章节" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-LeetCode DP章节" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" class="article-date">
+  <time class="dt-published" datetime="2022-12-02T09:23:42.000Z" itemprop="datePublished">2022-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="DP模板"><a href="#DP模板" class="headerlink" title="DP模板"></a>DP模板</h2><ol>
+<li>确定数组<code>dp[i]</code>的含义，以及下标<code>i</code>的含义</li>
+<li>确定数组<code>dp[i]</code>的递推公式</li>
+<li>确定数组<code>dp[i]</code>的初始值</li>
+<li>确定遍历顺序</li>
+<li>举例推导</li>
+</ol>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>容易想到递归的方法来实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n&lt;=1)</span><br><span class="line">            return n;</span><br><span class="line">        return fib(n-1) + fib(n-2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n!)，空间复杂度为O(n)</p>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>DP数组的含义是<code>i</code>位置的斐波那契数列值是<code>dp[i]</code></p>
+<p>递推公式为<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
+<p>DP数组初始值<code>dp[0]=0,dp[1]=1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        vector&lt;int&gt; vec(n+1);</span><br><span class="line">        vec[0] = 0;</span><br><span class="line">        vec[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            vec[i] = vec[i - 1] + vec[i - 2];</span><br><span class="line">        &#125;</span><br><span class="line">        return vec[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(n)</p>
 <h3 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h3><p>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，则可以不需要借助容器<code>vector</code>来记录，而是只用两个变量</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        int v0 = 0, v1 = 1;</span><br><span class="line">        int sum = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = v0 + v1;</span><br><span class="line">            v0 = v1;</span><br><span class="line">            v1 = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        return v1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -120,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbak8d6t00015kuy8yfi1z8y" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9k0002uouydz2edwuu" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -180,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbak8d7800065kuyaqnch8w2" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbd4kp9s0008uouy2hroau5r" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -231,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbak8d7d00095kuyc9cd6t8u" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbd4kp9u000auouy8u7h2evw" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -530,7 +614,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbak8d7c00085kuy55gufu24" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9t0009uouy0cvhdkes" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -932,7 +1016,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbak8d6m00005kuyfr4f2yxv" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbd4kp9c0000uouy5t8zfz17" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1318,7 +1402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbak8d6z00035kuy6mrbggjo" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9r0007uouyg7xo1byp" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3319,7 +3403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbak8d6w00025kuy7sbr5pvt" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbd4kp9l0003uouy7atqas6h" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -3990,7 +4074,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbak8d7500055kuy465oek5e" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9q0006uouy4ghjf09j" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -4029,7 +4113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbak8d7e000a5kuyfc19clcq" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbd4kp9v000buouyeq31clk7" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
@@ -4090,6 +4174,10 @@
           </li>
         
           <li>
+            <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/29/create_blog/">(no title)</a>
           </li>
         
@@ -4099,10 +4187,6 @@
         
           <li>
             <a href="/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/">LeetCode贪心算法章节</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/">C3P第三部分</a>
           </li>
         
       </ul>
