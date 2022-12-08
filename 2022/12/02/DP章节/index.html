@@ -14,7 +14,7 @@
 <meta property="og:description" content="DP模板 确定数组dp[i]的含义，以及下标i的含义 确定数组dp[i]的递推公式 确定数组dp[i]的初始值 确定遍历顺序 举例推导  斐波那契数列递归容易想到递归的方法来实现 12345678class Solution &amp;#123;public:    int fib(int n) &amp;#123;        if(n&lt;&#x3D;1)            return n;        r">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-02T09:23:42.000Z">
-<meta property="article:modified_time" content="2022-12-05T11:00:50.557Z">
+<meta property="article:modified_time" content="2022-12-07T05:53:16.737Z">
 <meta property="article:author" content="Kevin">
 <meta property="article:tag" content="student blog">
 <meta name="twitter:card" content="summary">
@@ -142,11 +142,35 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int climbStairs(int n) &#123;</span><br><span class="line">        if(n &lt;= 3)  return n;</span><br><span class="line">        int res = 0;</span><br><span class="line">        int q = 1, w = 2, e = 3;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            e = q + w;</span><br><span class="line">            q = w;</span><br><span class="line">            w = e;</span><br><span class="line">        &#125;</span><br><span class="line">        return e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助三个变量来完成</strong></p>
-<h2 id="使用最小花费爬楼梯"><a href="#使用最小花费爬楼梯" class="headerlink" title="使用最小花费爬楼梯"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">使用最小花费爬楼梯</a></h2>
+<h2 id="使用最小花费爬楼梯"><a href="#使用最小花费爬楼梯" class="headerlink" title="使用最小花费爬楼梯"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">使用最小花费爬楼梯</a></h2><p>该题给出爬每层楼梯的花费，允许每次爬一个或两个阶梯，要求使用最低花费爬到楼梯顶部</p>
+<h3 id="DP思路-1"><a href="#DP思路-1" class="headerlink" title="DP思路"></a>DP思路</h3><p>可以看出，当爬到第n层楼梯时，当前总共的花费与<code>n-1</code>级楼梯的花费有关，也就是说当前状态可以由之前的状态推导出来</p>
+<ul>
+<li><p>确定DP数组含义</p>
+<p><code>DP[i]</code>表示在台阶<code>i</code>时的总共花费</p>
+</li>
+<li><p>确定递推公式</p>
+<p><code>DP[i] = min(DP[i - 1] + costs[i - 1], DP[i-  2] + costs[i - 2];</code></p>
+</li>
+<li><p>确定初始值</p>
+<p><code>DP[1] = 0, DP[2] = 0</code>，初始值应由递推公式中的<code>cost[i]</code>来决定</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>遍历顺序为正序，从头到尾遍历数组</p>
+</li>
+</ul>
+<h3 id="DP-2"><a href="#DP-2" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minCostClimbingStairs(vector&lt;int&gt;&amp; cost) &#123;</span><br><span class="line">        vector&lt;int&gt; dp(cost.size()+1);</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        for(int i = 2; i &lt;= cost.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = min(dp[i - 1] + cost[i-1], dp[i-2] + cost[i-2]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[cost.size()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DP优化-2"><a href="#DP优化-2" class="headerlink" title="DP优化"></a>DP优化</h3><p>类似的，<strong>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，因此可以使用滚动数组实现</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minCostClimbingStairs(vector&lt;int&gt;&amp; cost) &#123;</span><br><span class="line">        int q = 0, w = 0, e = 0;</span><br><span class="line">        for(int i = 2; i &lt;= cost.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            e = min(q + cost[i-2], w + cost[i-1]);</span><br><span class="line">            q = w;</span><br><span class="line">            w = e;</span><br><span class="line">        &#125;</span><br><span class="line">        return e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助三个变量来完成</strong></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbd4kp9h0001uouy2i9vgdix" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbenrktl0002lkuy1fvd9kaz" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -156,10 +180,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DP章节
+        
+      </div>
+    </a>
   
-    <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2022/11/29/create_blog/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">DP章节</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>
@@ -211,11 +244,11 @@
       <ul>
         
           <li>
-            <a href="/2022/12/02/DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+            <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
           </li>
         
           <li>
-            <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
+            <a href="/2022/12/02/DP%E7%AB%A0%E8%8A%82/">DP章节</a>
           </li>
         
           <li>
