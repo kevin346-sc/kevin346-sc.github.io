@@ -164,71 +164,119 @@
 
 
 <h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助三个变量来完成</strong></p>
+<h2 id="不同路径"><a href="#不同路径" class="headerlink" title="不同路径"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">不同路径</a></h2><p>该题有一个<code>m*n</code>大小的网格图，要求只能一次向下或者向右移动一步，返回总共不同的路径数</p>
+<h3 id="DP思路-2"><a href="#DP思路-2" class="headerlink" title="DP思路"></a>DP思路</h3><p>若为<code>1*1</code>的网格，则有1条路径</p>
+<p><code>2*2</code>的网格，有2条路径</p>
+<p><code>3*2</code>或者是<code>2*3</code>的网格，则有3条路径</p>
+<p><code>3*3</code>的网格中，有6条路径</p>
+<p>由上可知，<strong>在<code>m*n</code>的网格当中，其路径总数等于 <code>(m-1)*n</code>网格的路径总数加上<code>m*(n-1)</code>网格的路径总数</strong>，因此将使用DP算法</p>
+<ul>
+<li><p>确定数组<code>DP[i][j]</code>含义</p>
+<p><code>DP[i][j]</code>表示的是在<code>i*j</code>的网格当中，总共有<code>DP[i][j]</code>条路径</p>
+</li>
+<li><p>确定初始值</p>
+<p><strong>为了方便，数组<code>DP[i][j]</code>表示第<code>i</code>行第<code>j</code>列，且不影响结果</strong></p>
+<p><code>DP[1][j]</code>均为1，即第一行中的数，代表着<code>1*n</code>的所有网格</p>
+<p><code>DP[i][1]</code>均为1，同理</p>
+</li>
+<li><p>确定状态转移方程</p>
+<p><code>DP[i][j] = DP[i - 1][j] + DP[i][j - 1]</code></p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>从<code>i=2</code>开始遍历到<code>n</code>，正向遍历</p>
+</li>
+</ul>
+<h3 id="DP-3"><a href="#DP-3" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution&#123;</span><br><span class="line">pubulic:</span><br><span class="line">	int uniquePaths(int m, int n)</span><br><span class="line">	&#123;</span><br><span class="line">		if(m == 1 || n == 1)</span><br><span class="line">			return 1;</span><br><span class="line">		vector&lt;int&gt; row(n + 1,1);</span><br><span class="line">		vector&lt;vector&lt;int&gt;&gt; dp(n + 1,row);</span><br><span class="line">		//dp数组全部元素初始化为1</span><br><span class="line">		for(int i = 2; i &lt;= m; i++)</span><br><span class="line">			for(int j = 2; j &lt;= n; j++)</span><br><span class="line">				dp[i][j] = dp[i - 1][j] + dp[i][j - 1];</span><br><span class="line">		return dp[m][n];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>时间复杂度为O(n^2)，遍历网格中的所有元素，空间复杂度为O(n^2)，为网格中的每个元素独立创建一份空间</p>
+<h3 id="DP优化-3"><a href="#DP优化-3" class="headerlink" title="DP优化"></a>DP优化</h3><p>由上可知，当遍历时，当前位置下的元素只与同行上一列元素和同列上一行元素有关，因此可以只使用一维数组来进行空间的优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int uniquePaths(int m, int n) &#123;</span><br><span class="line">        if(m==1||n==1)  return 1;</span><br><span class="line">        vector&lt;int&gt; dp(n+1,1);</span><br><span class="line">        for(int i = 2; i &lt;= m; i++)</span><br><span class="line">            for(int j = 2; j &lt;= n; j++)</span><br><span class="line">                dp[j] += dp[j-1];</span><br><span class="line">            </span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>初始化中只需要对首行和首列元素进行初始化为1的操作</p>
+<h2 id="不同路径-II"><a href="#不同路径-II" class="headerlink" title=" 不同路径 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths-ii/"> 不同路径 II</a></h2><p>与<a href="#%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84">I</a>比较，该题多了障碍的设置，要求所有需要经过障碍所在位置的路径都不能被通过</p>
+<h3 id="DP思路-3"><a href="#DP思路-3" class="headerlink" title="DP思路"></a>DP思路</h3><p>如果在<code>dp[i-1][j]</code>位置上有障碍，那么需要通过该点通往任意位置都将无法通过，这样可以通过将<code>dp[i-1][j]=0</code>，而<code>dp[i][j] = dp[i-1][j] + dp[i][j-1] = dp[i][j-1]</code></p>
+<ul>
+<li><p>确定数组<code>DP[i][j]</code>含义</p>
+<p><code>DP[i][j]</code>表示的是在<code>i*j</code>的网格当中，排除有障碍的，总共有<code>DP[i][j]</code>条路径</p>
+</li>
+<li><p>确定初始值</p>
+<p><strong>该题中 数组<code>DP[i+1][j+1]</code>表示第<code>i</code>行第<code>j</code>列</strong>，并且只需要对首列和首行的元素进行初始化</p>
+<p>数组所有元素初始化为0，<strong>遍历数组中第0行和第0列的元素，如果当前位置上的元素没有遇到障碍，则将当前元素初值设为1</strong>，同时，<strong>如果遇到有障碍，那么在障碍之后的所有元素值都应该初始化为0</strong></p>
+<p>如数组<code>[[0,0],[1,1],[0,0]]</code>，这时，对应的<code>dp</code>数组最终应该被初始化为<code>[[1,1],[0,0],[0,0]]</code></p>
+</li>
+<li><p>确定状态转移方程</p>
+<p><code>DP[i][j] = DP[i - 1][j] + DP[i][j - 1]</code>，与上题一致</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>正向遍历，与上题遍历顺序一致，但该题因为下标代表的含义不同，所以应该从<code>i=1</code>开始遍历到<code>n-1</code></p>
+</li>
+</ul>
+<h3 id="DP-4"><a href="#DP-4" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; obstacleGrid) &#123;</span><br><span class="line">        int m = obstacleGrid.size(), n = obstacleGrid[0].size();</span><br><span class="line">        if(obstacleGrid[0][0]==1||obstacleGrid[m-1][n-1]==1)   return 0;</span><br><span class="line">        vector&lt;int&gt; row(n,0);</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; dp(m, row);</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(obstacleGrid[i][0]==0)</span><br><span class="line">                dp[i][0] = 1;</span><br><span class="line">            else</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int j = 0; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(obstacleGrid[0][j]==0)</span><br><span class="line">                dp[0][j] = 1;</span><br><span class="line">            else</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 1; i &lt; m; i++)</span><br><span class="line">            for(int j = 1; j &lt; n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(obstacleGrid[i][j]==1)</span><br><span class="line">                    dp[i][j] = 0;</span><br><span class="line">                else</span><br><span class="line">                    dp[i][j] = dp[i-1][j] + dp[i][j-1];</span><br><span class="line">            &#125;</span><br><span class="line">        return dp[m-1][n-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="DP优化-4"><a href="#DP优化-4" class="headerlink" title="DP优化"></a>DP优化</h3><p>同样地，该题也可以只使用一个一维滚动数组来减小空间开销</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; obstacleGrid) &#123;</span><br><span class="line">        int m = obstacleGrid.size(), n = obstacleGrid[0].size();</span><br><span class="line">        if(obstacleGrid[0][0]==1||obstacleGrid[m-1][n-1]==1)   return 0;</span><br><span class="line">        vector&lt;int&gt; dp(n,0);</span><br><span class="line">        bool flag = false;</span><br><span class="line">        </span><br><span class="line">        for(int i = 0; i &lt; m; i++)</span><br><span class="line">            for(int j = 0; j &lt; n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(j==0 &amp;&amp; flag)</span><br><span class="line">                    continue;</span><br><span class="line">                if(obstacleGrid[i][j]==1)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j] = 0;</span><br><span class="line">                    if(j==0)</span><br><span class="line">                        flag = true;</span><br><span class="line">                &#125;</span><br><span class="line">                else if(j==0)</span><br><span class="line">                    dp[j] = 1;</span><br><span class="line">                else</span><br><span class="line">                    dp[j] += dp[j-1];</span><br><span class="line">            &#125;</span><br><span class="line">        return dp[n-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>因为不能另外用一个循环来进行<strong>首列的初始化</strong>，因此借助flag变量来标记是否遇到障碍，如果遇到，之后的元素都将初始化为0；而首行元素则不需要，因为所有元素都被初始化为0，并且当前元素的值，<strong>即<code>dp[i]</code>只与自身大小与左边元素大小有关</strong>，如<code>[[0,0,0,1,0,0]]</code>数组中，在遇到障碍之前的<code>dp</code>数组为<code>[1,1,1]</code>，遇到障碍则<code>dp[3]=0</code>，之后的元素<code>dp[i] += dp[i-1]</code>均为0</p>
+<h3 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h3><p>与<a href="#%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84">上一题</a>对比，该题处理方法的不同主要在于 初始化中不能将首行和首列所有元素都初始化为1，因为可能会在首行或首列元素中放置了障碍，并且，<strong>遇到障碍之后的首行或首列元素都应该初始化为0</strong>，意味着<strong>在首行或首列遇到障碍之后的元素都将没有路径能够到达。</strong></p>
+<h2 id="不同的二叉搜索树"><a href="#不同的二叉搜索树" class="headerlink" title="不同的二叉搜索树"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">不同的二叉搜索树</a></strong></h2><p>该题中给定一个整数，需要由<code>1-n</code>不同结点值组成一颗二叉搜索树，返回最多能组成互不相同的种树</p>
+<h3 id="DP思路-4"><a href="#DP思路-4" class="headerlink" title="DP思路"></a>DP思路</h3><p>当n为1，只有1种二叉搜索树</p>
+<p>当n为2，有2种二叉搜索树</p>
+<p>当n为3，有5种二叉搜索树。 再细分，当以1为根结点，有两个大于1的数在根结点右边，则此时右子树可以组成n为2情况下的2种二叉搜索树；当以2为结点，同理有1个小于2的数在左子树，有1个数在右子树；当以3为结点，有2个数在左子树。</p>
+<p>综上，可得n&#x3D;3时，<code>二叉搜索树数量=(右子树n=2的数量 * 左子树n=0的数量) + (右子树n=1的数量 * 左子树n=1的数量) + (右子树n=0的数量 * 左子树n=2的数量)</code></p>
+<ul>
+<li><p>确定数组<code>dp[i]</code>含义</p>
+<p><code>dp[i]</code>表示的是i个结点下能组成二叉搜索树的数量</p>
+</li>
+<li><p>确定初始值</p>
+<p><code>dp[0]=1</code>，空结点时能组成1种二叉搜索树</p>
+<p><code>dp[1]=1</code></p>
+<p><code>dp[2]=2</code></p>
+</li>
+<li><p>确定状态转移方程</p>
+<p><code>dp[i]=dp[j-1]*dp[i-j]</code>，需要嵌套一层循环</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>正向遍历，从<code>i=3</code>开始遍历到<code>n</code>，从<code>j = 1</code>遍历到 <code>j = i</code></p>
+</li>
+</ul>
+<h3 id="DP-5"><a href="#DP-5" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int numTrees(int n) &#123;</span><br><span class="line">        if(n==1)    return 1;</span><br><span class="line">        if(n==2)    return 2;</span><br><span class="line"></span><br><span class="line">        vector&lt;int&gt; dp(n+1,0);</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        dp[2] = 2;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++)</span><br><span class="line">            for(int j = 1; j &lt;= i;j++)</span><br><span class="line">                dp[i] += dp[j - 1] * dp[i-j];</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数学解法"><a href="#数学解法" class="headerlink" title="数学解法"></a>数学解法</h3><p>卡特兰数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//公式：C0 = 1 , Cn+1 = 2(2n+1)/(n+2)*Cn </span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int numTrees(int n) &#123;</span><br><span class="line">        long long C = 1;</span><br><span class="line">        for (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">            C = C * 2 * (2 * i + 1) / (i + 2);</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)C;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h3><p>该题难以推出状态转移方程，不妨细分情况，尽可能将之前的状态套进当前状态来考虑</p>
+<h2 id="整数拆分"><a href="#整数拆分" class="headerlink" title="整数拆分"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/">整数拆分</a></strong></h2><p>该题给定一个正整数n，将其拆分为n个正整数的和，并返回这些和的最大化乘积</p>
+<h3 id="DP思路-5"><a href="#DP思路-5" class="headerlink" title="DP思路"></a>DP思路</h3><p>算出前8个正整数的最大乘积为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1	2	3	4	5	6	7	8</span><br><span class="line">1	1	2	4	6	9	12	18</span><br></pre></td></tr></table></figure>
+
+<p>将8拆分成以下的情况，</p>
+<p><code>8 = j + (i - j)</code>，此时，<code>j</code>和<code>i - j</code>不再拆分，那么 <code>n=8</code>的最大乘积 &#x3D; <code>i</code> * <code>(i - j)</code>；若继续拆分<code>i - j</code>，那么 <code>n=8</code>的最大乘积 &#x3D; <code>i</code> * (<code>n = (i - j)</code>的最大乘积)</p>
+<p>综上，可以得到 <code>dp[i] = max(dp[i], max(j * dp[i - j], j * (i - j))</code></p>
+<ul>
+<li><p>确定数组<code>dp[i]</code>含义</p>
+<p><code>dp[i]</code>表示的是整数<code>i</code>拆分的正整数的最大乘积</p>
+</li>
+<li><p>确定初始值</p>
+<p><code>dp[1]=1</code></p>
+<p><code>dp[2]=1</code></p>
+<p><code>dp[3]=2</code></p>
+</li>
+<li><p>确定状态转移方程</p>
+<p><code>dp[i] = max(dp[i], max(j * dp[i - j], j * (i - j))</code>，需要嵌套一层循环</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>正向遍历，从<code>i=4</code>开始遍历到<code>n</code>，从<code>j = 1</code>遍历到<code>j = i</code></p>
+</li>
+</ul>
+<h3 id="DP-6"><a href="#DP-6" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int integerBreak(int n) &#123;</span><br><span class="line">        vector&lt;int&gt; dp(n+1);</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">            for(int j = 1; j &lt;= i/2; j++)</span><br><span class="line">                dp[i] = max(dp[i], max(j*(i-j), dp[i-j]*j));</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbfrnv3d0004hsuy04dp4mdo" data-title="DP章节" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-LeetCode DP章节" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" class="article-date">
-  <time class="dt-published" datetime="2022-12-02T09:23:42.000Z" itemprop="datePublished">2022-12-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="DP模板"><a href="#DP模板" class="headerlink" title="DP模板"></a>DP模板</h2><ol>
-<li>确定数组<code>dp[i]</code>的含义，以及下标<code>i</code>的含义</li>
-<li>确定数组<code>dp[i]</code>的递推公式</li>
-<li>确定数组<code>dp[i]</code>的初始值</li>
-<li>确定遍历顺序</li>
-<li>举例推导</li>
-</ol>
-<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>容易想到递归的方法来实现</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n&lt;=1)</span><br><span class="line">            return n;</span><br><span class="line">        return fib(n-1) + fib(n-2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度为O(n!)，空间复杂度为O(n)</p>
-<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>DP数组的含义是<code>i</code>位置的斐波那契数列值是<code>dp[i]</code></p>
-<p>递推公式为<code>dp[i] = dp[i-1]+dp[i-2]</code></p>
-<p>DP数组初始值<code>dp[0]=0,dp[1]=1</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        vector&lt;int&gt; vec(n+1);</span><br><span class="line">        vec[0] = 0;</span><br><span class="line">        vec[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            vec[i] = vec[i - 1] + vec[i - 2];</span><br><span class="line">        &#125;</span><br><span class="line">        return vec[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度为O(n)，空间复杂度为O(n)</p>
-<h3 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h3><p>因为<code>dp[i]</code>的值只与其前两个值，即<code>dp[i-1]</code>和<code>dp[i-2]</code>有关，则可以不需要借助容器<code>vector</code>来记录，而是只用两个变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fib(int n) &#123;</span><br><span class="line">        if(n == 0)  return 0;</span><br><span class="line">        int v0 = 0, v1 = 1;</span><br><span class="line">        int sum = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = v0 + v1;</span><br><span class="line">            v0 = v1;</span><br><span class="line">            v1 = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        return v1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>由于<code> F(n)</code> 只和 <code>F(n-1)</code>与 <code>F(n-2)</code>有关，因此可以使用「滚动数组思想」把空间复杂度优化成 <code>O(1)</code>，即只需要借助两个变量来完成</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/" data-id="clbfrnv3e0005hsuy1zcyduwf" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbhbntx40001a0uyb7jja2eg" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -288,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbfrnv3h0008hsuy2u7y5qlk" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbhbntx70003a0uyd0sb215f" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -339,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbfrnv3l000ahsuy1tlg4rx1" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbhbntxc0007a0uy2g681en2" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -634,11 +682,11 @@
 <li>在对除根结点外的所有结点遍历结束后，对于根结点，可能会出现根结点未覆盖的情况，因此还需要对根结点的返回值进行一次判断，若返回0则需要再添加一个监控</li>
 </ul>
 <h3 id="总结-16"><a href="#总结-16" class="headerlink" title="总结"></a>总结</h3><p>该题中局部最优在于 <strong>不让叶子结点添加监控，而让叶子结点的父结点添加监控</strong>，在此基础上，推导出3种不同结点值的状况，并进行分类讨论</p>
-
+<h2 id="通过最少操作次数使数组的和相等"><a href="#通过最少操作次数使数组的和相等" class="headerlink" title="通过最少操作次数使数组的和相等"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/equal-sum-arrays-with-minimum-number-of-operations/">通过最少操作次数使数组的和相等</a></strong></h2><h3 id="贪心-12"><a href="#贪心-12" class="headerlink" title="贪心"></a>贪心</h3><h3 id="总计"><a href="#总计" class="headerlink" title="总计"></a>总计</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbfrnv3i0009hsuy9w429bvy" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbhbntxe0009a0uy8i12daad" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -1040,7 +1088,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbfrnv310000hsuyhoipb799" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbhbntww0000a0uy0th8fsoo" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1426,7 +1474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbfrnv3g0007hsuyba7j8gaj" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbhbntx60002a0uyey71bso9" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3427,7 +3475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbfrnv370001hsuyhhdtexzr" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbhbntx80004a0uyanfv5jcp" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -4098,7 +4146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbfrnv3f0006hsuyc94940bs" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbhbntx90005a0uy8g3ecuv2" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -4137,7 +4185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbfrnv3n000bhsuy66hq0z7o" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbhbntxd0008a0uyakgk6v68" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
@@ -4198,10 +4246,6 @@
           </li>
         
           <li>
-            <a href="/2022/12/02/LeetCode%20DP%E7%AB%A0%E8%8A%82/">DP章节</a>
-          </li>
-        
-          <li>
             <a href="/2022/11/29/create_blog/">(no title)</a>
           </li>
         
@@ -4211,6 +4255,10 @@
         
           <li>
             <a href="/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/">LeetCode贪心算法章节</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/">C3P第三部分</a>
           </li>
         
       </ul>
