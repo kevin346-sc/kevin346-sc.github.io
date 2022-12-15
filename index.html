@@ -272,11 +272,52 @@
 </ul>
 <h3 id="DP-6"><a href="#DP-6" class="headerlink" title="DP"></a>DP</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int integerBreak(int n) &#123;</span><br><span class="line">        vector&lt;int&gt; dp(n+1);</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)</span><br><span class="line">            for(int j = 1; j &lt;= i/2; j++)</span><br><span class="line">                dp[i] = max(dp[i], max(j*(i-j), dp[i-j]*j));</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h3>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>数学证明：</p>
+<blockquote>
+<p>$$ {函数极值证明法}<br>函数极值证明法</p>
+<p>显然，如果将给定的正整数拆分成尽可能多的某个特定的正整数，则这些正整数的乘积最大。</p>
+<p>定义函数 f(x)f(x) 表示将给定的正整数 nn 拆分成尽可能多的正数 xx 的情况下的最大乘积，则可以将 nn 分成 \dfrac{n}{x}<br>x<br>n<br>​<br>  项，此时 f(x)&#x3D;x^{\frac{n}{x}}f(x)&#x3D;x<br>x<br>n<br>​</p>
+<p> ，目标是求 f(x)f(x) 的最大值，即</p>
+<p>\mathop{\max}\limits_{x}(f(x))<br>x<br>max<br>​<br> (f(x))</p>
+<p>可以将 f(x)f(x) 写成如下形式：</p>
+<p>f(x)&#x3D;x^{\frac{n}{x}}&#x3D;e^{\frac{n \ln x}{x}}<br>f(x)&#x3D;x<br>x<br>n<br>​</p>
+<p> &#x3D;e<br>x<br>nlnx<br>​</p>
+<p>令 g(t)&#x3D;e^tg(t)&#x3D;e<br>t<br> ，h(x)&#x3D;\dfrac{\ln x}{x}h(x)&#x3D;<br>x<br>lnx<br>​<br> ，则有 f(x)&#x3D;g(n \cdot h(x))f(x)&#x3D;g(n⋅h(x))。由于 g(t)g(t) 是单调递增的，n&gt;0n&gt;0，因此 h(x)h(x) 与 f(x)f(x) 的单调性相同。</p>
+<p>计算 h(x)h(x) 的驻点，即 h’(x)&#x3D;\dfrac{1- \ln x}{x^2}&#x3D;0h<br>′<br> (x)&#x3D;<br>x<br>2</p>
+<p>1−lnx<br>​<br> &#x3D;0 的点，得到驻点为 x&#x3D;ex&#x3D;e。</p>
+<p>由于当 0&lt;x&lt;e0&lt;x&lt;e 时 h’(x)&gt;0h<br>′<br> (x)&gt;0，当 x&gt;ex&gt;e 时 h’(x)&lt;0h<br>′<br> (x)&lt;0，因此 x&#x3D;ex&#x3D;e 是 h(x)h(x) 的极大值点，也是 f(x)f(x) 的极大值点。由于函数 f(x)f(x) 的定义域连续，因此极大值点唯一，也是最大值点。</p>
+<p>因此，当 x&#x3D;ex&#x3D;e 时，f(x)f(x) 取到最大值，\max f(x)&#x3D;f(e)&#x3D;e^{\frac{n}{e}}maxf(x)&#x3D;f(e)&#x3D;e<br>e<br>n<br>​</p>
+<p> 。</p>
+<p>由于 ee 不是整数，因此使用与 ee 最接近的整数作为 xx 的值，xx 可以是 22 或 33，此时需要比较 f(2)f(2) 与 f(3)f(3) 的大小，可以通过计算 \dfrac{f(3)}{f(2)}<br>f(2)<br>f(3)<br>​<br>  进行比较。</p>
+<h1 id="dfrac-f-3-f-2-x3D-dfrac-e-n-cdot-h-3-e-n-cdot-h-2-x3D-e-n-cdot-h-3-n-cdot-h-2-x3D-e-n-cdot-frac-ln-3-3-frac-ln-2-2-x3D-e-frac-n-6-cdot-2-ln-3-3-ln-2-x3D-e-frac-n-6-cdot-ln-9-ln-8-f-2-f-3-​"><a href="#dfrac-f-3-f-2-x3D-dfrac-e-n-cdot-h-3-e-n-cdot-h-2-x3D-e-n-cdot-h-3-n-cdot-h-2-x3D-e-n-cdot-frac-ln-3-3-frac-ln-2-2-x3D-e-frac-n-6-cdot-2-ln-3-3-ln-2-x3D-e-frac-n-6-cdot-ln-9-ln-8-f-2-f-3-​" class="headerlink" title="\dfrac{f(3)}{f(2)}&#x3D;\dfrac{e^{n \cdot h(3)}}{e^{n \cdot h(2)}}&#x3D;e^{n \cdot h(3)-n \cdot h(2)}&#x3D;e^{n \cdot (\frac{\ln 3}{3} - \frac{\ln 2}{2})}&#x3D;e^{\frac{n}{6} \cdot (2 \ln 3 - 3 \ln 2)}&#x3D;e^{\frac{n}{6} \cdot (\ln 9 - \ln 8)}f(2)f(3)​"></a>\dfrac{f(3)}{f(2)}&#x3D;\dfrac{e^{n \cdot h(3)}}{e^{n \cdot h(2)}}&#x3D;e^{n \cdot h(3)-n \cdot h(2)}&#x3D;e^{n \cdot (\frac{\ln 3}{3} - \frac{\ln 2}{2})}&#x3D;e^{\frac{n}{6} \cdot (2 \ln 3 - 3 \ln 2)}&#x3D;e^{\frac{n}{6} \cdot (\ln 9 - \ln 8)}<br>f(2)<br>f(3)<br>​</h1><p>e<br>n⋅h(2)</p>
+<p>e<br>n⋅h(3)</p>
+<p>​<br> &#x3D;e<br>n⋅h(3)−n⋅h(2)<br> &#x3D;e<br>n⋅(<br>3<br>ln3<br>​<br> −<br>2<br>ln2<br>​<br> )<br> &#x3D;e<br>6<br>n<br>​<br> ⋅(2ln3−3ln2)<br> &#x3D;e<br>6<br>n<br>​<br> ⋅(ln9−ln8)</p>
+<p>由于 \ln 9 &gt; \ln 8ln9&gt;ln8，因此 \dfrac{f(3)}{f(2)}&gt;1<br>f(2)<br>f(3)<br>​</p>
+<blockquote>
+<p>1，即 f(3)&gt;f(2)f(3)&gt;f(2)。当 x&#x3D;3x&#x3D;3 时，可以得到最大乘积。因此，应该将给定的正整数拆分成尽可能多的 33。</p>
+</blockquote>
+<p>根据 nn 除以 33 的余数进行分类讨论：</p>
+<p>如果余数为 00，即 n&#x3D;3m(m \ge 2)n&#x3D;3m(m≥2)，则将 nn 拆分成 mm 个 33；</p>
+<p>如果余数为 11，即 n&#x3D;3m+1(m \ge 1)n&#x3D;3m+1(m≥1)，由于 2 \times 2 &gt; 3 \times 12×2&gt;3×1，因此将 nn 拆分成 m-1m−1 个 33 和 22 个 22；</p>
+<p>如果余数为 22，即 n&#x3D;3m+2(m \ge 1)n&#x3D;3m+2(m≥1)，则将 nn 拆分成 mm 个 33 和 11 个 22。</p>
+<p>上述拆分的适用条件是 n \ge 4n≥4。如果 n \le 3n≤3，则上述拆分不适用，需要单独处理。</p>
+<p>如果 n&#x3D;2n&#x3D;2，则唯一的拆分方案是 2&#x3D;1+12&#x3D;1+1，最大乘积是 1 \times 1&#x3D;11×1&#x3D;1；</p>
+<p>如果 n&#x3D;3n&#x3D;3，则拆分方案有 3&#x3D;1+2&#x3D;1+1+13&#x3D;1+2&#x3D;1+1+1，最大乘积对应方案 3&#x3D;1+23&#x3D;1+2，最大乘积是 1 \times 2&#x3D;21×2&#x3D;2。</p>
+<p>这两种情形可以合并为：当 n \le 3n≤3 时，最大乘积是 n-1n−1。<br>$$</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int integerBreak(int n) &#123;</span><br><span class="line">        if (n &lt;= 3) &#123;</span><br><span class="line">            return n - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        int quotient = n / 3;</span><br><span class="line">        int remainder = n % 3;</span><br><span class="line">        if (remainder == 0) &#123;</span><br><span class="line">            return (int)pow(3, quotient);</span><br><span class="line">        &#125; else if (remainder == 1) &#123;</span><br><span class="line">            return (int)pow(3, quotient - 1) * 4;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return (int)pow(3, quotient) * 2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h3><p>DP思路考虑状态转移方程时，把正整数n拆分成 <code>j</code>和<code>n-j</code>来考虑，自然得到拆分的一种乘积为<code>j * (n - j)</code>，考虑到上一个的状态，拆分为<code>n - j</code>还可以继续拆分，此时，另一种乘积则为<code>j * dp[n - j]</code></p>
+<p>贪心思路需要用到复杂数学证明的结论——尽可能将数拆分成2或3时的乘积最大。</p>
+<blockquote>
+<p>If an optimal product contains a factor f &gt;&#x3D; 4, then you can replace it with factors 2 and f-2 without losing optimality, as 2*(f-2) &#x3D; 2f-4 &gt;&#x3D; f. So you never need a factor greater than or equal to 4, meaning you only need factors 1, 2 and 3 (and 1 is of course wasteful and you’d only use it for n&#x3D;2 and n&#x3D;3, where it’s needed).</p>
+<p>For the rest I agree, 3<em>3 is simply better than 2</em>2*2, so you’d never use 2 more than twice.</p>
+</blockquote>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbhbntx40001a0uyb7jja2eg" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbofjvhf00018wuy5gdo0j9g" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -336,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbhbntx70003a0uyd0sb215f" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbofjvhp00088wuyamoz7qxu" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -387,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbhbntxc0007a0uy2g681en2" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbofjvhq00098wuy5o2ihsu3" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -682,11 +723,20 @@
 <li>在对除根结点外的所有结点遍历结束后，对于根结点，可能会出现根结点未覆盖的情况，因此还需要对根结点的返回值进行一次判断，若返回0则需要再添加一个监控</li>
 </ul>
 <h3 id="总结-16"><a href="#总结-16" class="headerlink" title="总结"></a>总结</h3><p>该题中局部最优在于 <strong>不让叶子结点添加监控，而让叶子结点的父结点添加监控</strong>，在此基础上，推导出3种不同结点值的状况，并进行分类讨论</p>
-<h2 id="通过最少操作次数使数组的和相等"><a href="#通过最少操作次数使数组的和相等" class="headerlink" title="通过最少操作次数使数组的和相等"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/equal-sum-arrays-with-minimum-number-of-operations/">通过最少操作次数使数组的和相等</a></strong></h2><h3 id="贪心-12"><a href="#贪心-12" class="headerlink" title="贪心"></a>贪心</h3><h3 id="总计"><a href="#总计" class="headerlink" title="总计"></a>总计</h3>
+<h2 id="通过最少操作次数使数组的和相等"><a href="#通过最少操作次数使数组的和相等" class="headerlink" title="通过最少操作次数使数组的和相等"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/equal-sum-arrays-with-minimum-number-of-operations/">通过最少操作次数使数组的和相等</a></strong></h2><p>该题给定两个数组，限定数组元素值均为1~6，任意修改数组元素，使得两个数组和相等，返回操作次数</p>
+<h3 id="贪心-12"><a href="#贪心-12" class="headerlink" title="贪心"></a>贪心</h3><p>采用贪心策略，局部最优在于优先让数组和大的数组元素改为1，数组和小的数组元素改为6，最快速逼近两个数组的和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minOperations(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">        int n1 = nums1.size();</span><br><span class="line">        int n2 = nums2.size();</span><br><span class="line">        if(n1*6 &lt; n2 || n2 * 6 &lt; n1 )</span><br><span class="line">            return -1;</span><br><span class="line">        int sub = accumulate(nums1.begin(), nums1.end(),0)-accumulate(nums2.begin(), nums2.end(),0);</span><br><span class="line">        if(sub &lt; 0)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(nums1, nums2);</span><br><span class="line">            sub = -sub;</span><br><span class="line">        &#125;</span><br><span class="line">        //要求nums1 减小， nums2 增大</span><br><span class="line">        vector&lt;int&gt; cnt(6);</span><br><span class="line">        for(auto n:nums1)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt[n-1]++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(auto n:nums2)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt[6-n]++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 5, res = 0;;i--)</span><br><span class="line">        &#123;</span><br><span class="line">            if(i*cnt[i] &gt;= sub)</span><br><span class="line">                return res + (sub+i-1)/i;</span><br><span class="line">            res += cnt[i];</span><br><span class="line">            sub -= i*cnt[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>让<code>nums1</code>的和比<code>nums2</code>的和大，即让<code>nums1</code>减小，<code>让nums2</code>增大；</p>
+<p>分别遍历两个数组，借助<code>vector</code>容器记录两个数组中能够减小或增大的最大范围，如<code>cnt[4]</code>含义是数组中原始值为5或者为2的元素有<code>cnt[4]</code>个；</p>
+<p>最后遍历<code>vector</code>容器，若当前减小或增大的最大范围能够覆盖两个数组的和的差，即<code>i*cnt[i] &gt;= sub</code>，意味着仅需要对当前<code>cnt[i]</code>个元素减小或增大<code>i</code>就能够让两个数组的和相等，否则，因为遍历顺序优先遍历修改范围更大的元素，所以先让这些元素对数组差进行填补，再遍历更小范围的元素；</p>
+<p>返回值中<code>return res + (sub+i-1)/i;</code>而不是直接返回<code>return res + sub / i;</code>，若<code>sub</code>不能整除<code>i</code>，直接返回会有余数导致结果偏小不正确，若返回<code>return res + sub / i + 1</code>，此时若<code>sub</code>能整除<code>i</code>，没有余数又导致结果偏大不正确。因此<code>sub + i - 1</code>向上取整解决了这个问题</p>
+<h3 id="总结-17"><a href="#总结-17" class="headerlink" title="总结"></a>总结</h3><p>局部最优在于<strong>优先让数组中修改范围更大的元素进行修改，以最快速度填补数组和之差</strong></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbhbntxe0009a0uy8i12daad" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbofjvho00078wuy9doud9en" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -1088,7 +1138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbhbntww0000a0uy0th8fsoo" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbofjvhb00008wuy68at9by6" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1474,7 +1524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbhbntx60002a0uyey71bso9" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbofjvhi00038wuyc47sf8vz" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3475,7 +3525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbhbntx80004a0uyanfv5jcp" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbofjvhi00028wuy0gim7ert" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -4146,7 +4196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbhbntx90005a0uy8g3ecuv2" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbofjvhl00058wuygzz745b3" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -4185,7 +4235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbhbntxd0008a0uyakgk6v68" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbofjvhr000a8wuy94vf2fk6" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
