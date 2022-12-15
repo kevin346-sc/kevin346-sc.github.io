@@ -14,7 +14,7 @@
 <meta property="og:description" content="第三部分第十三章拷贝构造函数如果一个构造函数的第一个参数是自身类类型的引用，且任何额外参数都有默认值，则此构造函数是拷贝构造函数 合成拷贝构造函数可以用来阻止拷贝该类类型的对象 class Foo&amp;#123; public: Foo(const Foo&amp;); &amp;#125; 合成的拷贝构造函数：会将参数的成员逐个拷贝到正在创建的对象中，内置类型直接拷贝，虽然不能直接拷贝一个数组，但会逐个元素">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-09T13:46:25.000Z">
-<meta property="article:modified_time" content="2022-11-26T12:54:04.748Z">
+<meta property="article:modified_time" content="2022-12-15T06:44:40.435Z">
 <meta property="article:author" content="Kevin">
 <meta property="article:tag" content="student blog">
 <meta name="twitter:card" content="summary">
@@ -460,11 +460,15 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//原版本</span><br><span class="line">//void add_item(const shared_ptr&lt;Quote&gt;&amp; q) &#123;items.insert(q);&#125;</span><br><span class="line">void Basket::add_item(const Quote&amp; sale)</span><br><span class="line">&#123;</span><br><span class="line">	items.insert(shared_ptr&lt;Quote&gt;(sale.clone()));</span><br><span class="line">&#125;</span><br><span class="line">void Basket::add_item(const Quote&amp;&amp; sale)</span><br><span class="line">&#123;</span><br><span class="line">	items.insert(shared_ptr&lt;Quote&gt;(move(sale).clone()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>新版本<code>add_item</code>可以直接传入<code>quote</code>对象，程序自动生成相应类型的智能指针。<code>clone</code>无论是拷贝或者是移动数据，都会返回<code>shared_ptr</code>，然后调用<code>insert</code>直接加入到<code>items</code>中</p>
+<h2 id="第十六章——模板与泛型编程"><a href="#第十六章——模板与泛型编程" class="headerlink" title="第十六章——模板与泛型编程"></a>第十六章——模板与泛型编程</h2><h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p><code>template &lt;typename T&gt; int compare(const T &amp;v1, const T &amp;v2)&#123;&#125;</code></p>
+<p>以关键字 <code>template</code>开始，后接<strong>模板形参表</strong>，模板形参表是用<strong>尖括号</strong><code>&lt;&gt;</code>括住的一个或多个<strong>模板形参</strong>的列表，用逗号分隔，<strong>不能为空</strong></p>
+<p>类型模板参数——在关键字<code>typrename</code>或者<code>class</code>之后，可以用来指定返回类型或函数的参数类型</p>
+<p>非类型模板参数——用来表示一个值而非一个类型</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbofm9zx0000xouy4xzy8ril" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbp0vedp0000hguy77qd5z1y" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       

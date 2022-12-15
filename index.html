@@ -317,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbofma010001xouy3pdih7ng" data-title="DP章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/02/DP%E7%AB%A0%E8%8A%82/" data-id="clbp0vedv0001hguyee0y37ej" data-title="DP章节" class="article-share-link">Share</a>
       
       
       
@@ -377,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbofma0a0009xouy6b16hhga" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/create_blog/" data-id="clbp0vedx0003hguyhsoj5ywf" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -428,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbofma090007xouy8hh00ciu" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/29/hello-world/" data-id="clbp0vee30009hguy5t5d3jbx" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -736,7 +736,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbofma0a0008xouy9j0ghg6q" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/15/LeetCode%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbp0vedw0002hguygb442l7b" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -1134,11 +1134,15 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//原版本</span><br><span class="line">//void add_item(const shared_ptr&lt;Quote&gt;&amp; q) &#123;items.insert(q);&#125;</span><br><span class="line">void Basket::add_item(const Quote&amp; sale)</span><br><span class="line">&#123;</span><br><span class="line">	items.insert(shared_ptr&lt;Quote&gt;(sale.clone()));</span><br><span class="line">&#125;</span><br><span class="line">void Basket::add_item(const Quote&amp;&amp; sale)</span><br><span class="line">&#123;</span><br><span class="line">	items.insert(shared_ptr&lt;Quote&gt;(move(sale).clone()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>新版本<code>add_item</code>可以直接传入<code>quote</code>对象，程序自动生成相应类型的智能指针。<code>clone</code>无论是拷贝或者是移动数据，都会返回<code>shared_ptr</code>，然后调用<code>insert</code>直接加入到<code>items</code>中</p>
+<h2 id="第十六章——模板与泛型编程"><a href="#第十六章——模板与泛型编程" class="headerlink" title="第十六章——模板与泛型编程"></a>第十六章——模板与泛型编程</h2><h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p><code>template &lt;typename T&gt; int compare(const T &amp;v1, const T &amp;v2)&#123;&#125;</code></p>
+<p>以关键字 <code>template</code>开始，后接<strong>模板形参表</strong>，模板形参表是用<strong>尖括号</strong><code>&lt;&gt;</code>括住的一个或多个<strong>模板形参</strong>的列表，用逗号分隔，<strong>不能为空</strong></p>
+<p>类型模板参数——在关键字<code>typrename</code>或者<code>class</code>之后，可以用来指定返回类型或函数的参数类型</p>
+<p>非类型模板参数——用来表示一个值而非一个类型</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbofm9zx0000xouy4xzy8ril" data-title="C3P第三部分" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/09/C3P%E7%AC%AC%E4%B8%89%E3%80%81%E5%9B%9B%E9%83%A8%E5%88%86/" data-id="clbp0vedp0000hguy77qd5z1y" data-title="C3P第三部分" class="article-share-link">Share</a>
       
       
       
@@ -1524,7 +1528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbofma080006xouy0zqldkm4" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/05/LeetCode%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%AB%A0%E8%8A%82/" data-id="clbp0vedz0006hguy4g71e9zs" data-title="LeetCode回溯算法章节" class="article-share-link">Share</a>
       
       
       
@@ -3525,7 +3529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbofma030002xouybczi2lll" data-title="C3P阅读笔记" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/18/C3P%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" data-id="clbp0vedz0005hguy2va92y74" data-title="C3P阅读笔记" class="article-share-link">Share</a>
       
       
       
@@ -4196,7 +4200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbofma040003xouy1erja93e" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/15/LeetCode%E4%BA%8C%E5%8F%89%E6%A0%91%E7%AB%A0%E8%8A%82/" data-id="clbp0vedy0004hguy8fqx48pw" data-title="LeetCode贪心算法章节" class="article-share-link">Share</a>
       
       
       
@@ -4235,7 +4239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbofma0c000axouy8i6084ty" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/11/%E8%BF%99%E9%87%8C%E6%98%AF%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clbp0vee5000ahguyg7sfhntv" data-title="这里是第一篇博客文章" class="article-share-link">Share</a>
       
       
       
