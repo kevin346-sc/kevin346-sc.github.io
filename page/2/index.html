@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -136,6 +136,253 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kevin346-sc.github.io/2023/03/10/lab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serein’s Blog">
+      <meta itemprop="description" content="c++">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Serein’s Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/10/lab/" class="post-title-link" itemprop="url">lab</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-10 20:46:47" itemprop="dateCreated datePublished" datetime="2023-03-10T20:46:47+08:00">2023-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-11 10:49:20" itemprop="dateModified" datetime="2023-03-11T10:49:20+08:00">2023-03-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="0、docker搭建linux环境（for-Windows）"><a href="#0、docker搭建linux环境（for-Windows）" class="headerlink" title="0、docker搭建linux环境（for Windows）"></a>0、docker搭建linux环境（for Windows）</h1><h2 id="docker官网下载-docker-desktop"><a href="#docker官网下载-docker-desktop" class="headerlink" title="docker官网下载 docker desktop"></a><a target="_blank" rel="noopener" href="https://www.docker.com/">docker官网</a>下载 docker desktop</h2><p>右上角点击Get Started，选择Download for Windows进行下载并安装</p>
+<img src="C:\myblog\source\_posts\lab\docker_download.png" style="zoom:50%;" />
+
+<p>打开cmd，通过<code>docker --version</code> 命令查看是否安装成功</p>
+<h2 id="配置docker镜像"><a href="#配置docker镜像" class="headerlink" title="配置docker镜像"></a>配置docker镜像</h2><p>打开docker desktop，在设置中找到Docker Engine，将原有文本修改成如下并Apply &amp; restart</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;experimental&quot;: false,</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://docker.mirrors.ustc.edu.cn&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;features&quot;: &#123;</span><br><span class="line">    &quot;buildkit&quot;: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="C:\myblog\source\_posts\lab\docker_engine.png" style="zoom:50%;" />
+
+<p>cmd中输入<code>docker info</code>并显示有如下信息即可</p>
+<p><img src="C:\myblog\source_posts\lab\docker_info.png"></p>
+<h2 id="拉取Linux镜像并新建容器"><a href="#拉取Linux镜像并新建容器" class="headerlink" title="拉取Linux镜像并新建容器"></a>拉取Linux镜像并新建容器</h2><p>这里选择CentOS系统，当然也可以使用其他系统，只需要修改命令参数</p>
+<p>输入<code>docker pull centos</code>即可拉取最新的centos镜像，如果需要特定版本的镜像，则在系统名字后加上版本参数如<code>docker pull centos:7</code></p>
+<p>还可以输入<code>docker images</code>查看本地主机上的镜像</p>
+<p><img src="C:\myblog\source_posts\lab\docker_images.png"></p>
+<p>其中，</p>
+<p>RESPOSITORY 是镜像的仓库源，TAG 是镜像的标签，代表不同版本，IMAGE ID 是镜像ID，CREATED 是镜像的创建时间，SIZE是镜像的大小</p>
+<p>docker中镜像相当于一个类，如果运行还需要将类进行实例化，也就是新建一个容器</p>
+<p><code>docker run -it centos /bin/bash</code></p>
+<p>其中，</p>
+<p>选项-i 指交互式操作，-t 指终端，it通常一起使用，&#x2F;bin&#x2F;bash 表面希望有个交互式shell，centos不指定版本则默认使用最新版本即lastest</p>
+<p><code>[root@9c2ab6d80ac1 /]#</code>即进入centos系统界面</p>
+<h2 id="打开原有容器而非创建"><a href="#打开原有容器而非创建" class="headerlink" title="打开原有容器而非创建"></a>打开原有容器而非创建</h2><p>以刚新建的centost容器为例，</p>
+<img src="C:\myblog\source\_posts\lab\docker_name.png" style="zoom:80%;" />
+
+<ul>
+<li>从docker desktop复制其name或者ID号</li>
+<li><code>docker start 9c2ab6d80ac14f1edf1dec3f89c9b6f759018913f2e13a8086c3c30c24ba0dd9</code>或者<code>docker start csapp_env</code>让容器启动</li>
+<li><code>docker exec -it 9c2ab6d80ac14f1edf1dec3f89c9b6f759018913f2e13a8086c3c30c24ba0dd9 /bin/bash</code>以交互式操作进入容器</li>
+<li><code>[root@9c2ab6d80ac1 /]#</code>centos系统界面</li>
+<li>退出容器则输入<code>exit</code></li>
+</ul>
+<p>这里，除了<code>exec</code>也可以使用<code>attach</code>命令进入容器，<code>attach</code>如果从这个容器退出，就会导致容器的停止</p>
+<h1 id="1、datalab"><a href="#1、datalab" class="headerlink" title="1、datalab"></a>1、datalab</h1><h2 id="挂载目录实现Linux机与主机文件同步"><a href="#挂载目录实现Linux机与主机文件同步" class="headerlink" title="挂载目录实现Linux机与主机文件同步"></a>挂载目录实现Linux机与主机文件同步</h2><ul>
+<li>首先在主机中建立要共享的文件夹，复制其绝对路径，如C:\Users\amour\csapp\lab</li>
+<li>运行<code>docker container run -it -v &quot;C:\Users\amour\csapp\lab&quot;:/csapp --name=csapp_env contos /bin/bash</code>，实现挂载，其中，在容器中的目录名为<code>csapp</code>，容器名为<code>csapp_env</code></li>
+<li>验证挂载情况，进入容器中的目录<code>cd csapp</code>，再用<code>ls</code>指令查看子文件是否与主机中的一致</li>
+</ul>
+<h2 id="配置编译环境"><a href="#配置编译环境" class="headerlink" title="配置编译环境"></a>配置编译环境</h2><ul>
+<li><p>更新yum源，<code>yum -y update</code></p>
+<p>[报错1] 由于本地语言环境不适配可能会出现<code>Failed to set locale, defaulting to C.UTF-8</code>报错，则需要先安装响应的语言包和语言环境</p>
+<ul>
+<li><p><code>locale -a</code>查看目前已安装的语言包</p>
+</li>
+<li><p><code>yum install glibc-langpack-zh</code>安装中文语言包</p>
+<p>[报错2] 这一步可能又会出现<code>Failed to download metadata for repo &#39;appstream&#39;</code>,需要将软件包修改源，在<code>/etc/yum.repos</code>中更新<code>repos.d</code>使用<code>vault.centos.org</code>代替<code>mirror.centos.org</code></p>
+<ul>
+<li><p>cd &#x2F;etc&#x2F;yum.repos.d</p>
+</li>
+<li><p>vi CentOS-Linux-BaseOS.repo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[baseos]</span><br><span class="line">name=CentOS Linux $releasever - BaseOS</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/release=$releasever&amp;arch=$basearch&amp;repo=BaseOS&amp;infra=$infra</span><br><span class="line">#baseurl=http://mirror.centos.org/$contentdir/$releasever/BaseOS/$basearch/os/</span><br><span class="line">baseurl=https://vault.centos.org/centos/$releasever/BaseOS/$basearch/os/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vi CentOS-Linux-AppStream.repo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[appstream]</span><br><span class="line">name=CentOS Linux $releasever - AppStream</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=AppStream&amp;infra=$infra</span><br><span class="line">#baseurl=http://mirror.centos.org/$contentdir/$releasever/AppStream/$basearch/os/</span><br><span class="line">baseurl=https://vault.centos.org/centos/$releasever/AppStream/$basearch/os/ </span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>dnf install glibc-langpack-en</p>
+</li>
+<li><p>此时再输入<code>locale -a</code>查看目前的语言包，发现除了原有的<code>C.utf8</code>之外，还有其他的<code>en_utf8</code>和<code>zh_utf8</code>，至此，已解决语言环境不适配导致无法使用yum更新下载的问题</p>
+</li>
+</ul>
+</li>
+<li><p><code>yum install sudo</code>安装sudo</p>
+</li>
+<li><p><code>yum install make automake gcc gcc-c++ kernel-devel</code>安装c&#x2F;c++编译环境</p>
+</li>
+<li><p><code>yum install gdb</code>安装gdb调试器</p>
+</li>
+<li><p><code>yum install glibc-debel.i686</code>安装32位嵌入式C库</p>
+</li>
+<li><p>完成配置</p>
+</li>
+</ul>
+<p>至此，可以在主机的编译器中编写代码保存到共享目录中，在docker的虚拟centos容器中编译和运行代码</p>
+<p>如：在共享目录中创建<code>hello.c</code>文件并编写好，进入容器中的共享文件夹<code>cd csapp/L0/</code>，使用<code>make hello</code>进行编译，<code>./hello</code>即可运行</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kevin346-sc.github.io/2023/03/05/%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Kevin Huang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serein’s Blog">
+      <meta itemprop="description" content="c++">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Serein’s Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/05/%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">改造计划</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-05 14:15:33" itemprop="dateCreated datePublished" datetime="2023-03-05T14:15:33+08:00">2023-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-09 17:02:40" itemprop="dateModified" datetime="2023-03-09T17:02:40+08:00">2023-03-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="面向招聘要求和面经学习"><a href="#面向招聘要求和面经学习" class="headerlink" title="面向招聘要求和面经学习"></a>面向招聘要求和面经学习</h1><h2 id="基础语法-面经"><a href="#基础语法-面经" class="headerlink" title="基础语法 + 面经"></a>基础语法 + 面经</h2><p>利用宿舍时间10:00-11:00 C++ Primer</p>
+<p>牛客网面经、习题</p>
+<h2 id="操作系统（重点）"><a href="#操作系统（重点）" class="headerlink" title="操作系统（重点）"></a>操作系统（重点）</h2><p>网课：CMU15-413</p>
+<p>书籍：CSAPP + 现代操作系统</p>
+<p>项目相关：labs</p>
+<p>牛客网习题</p>
+<h2 id="计网"><a href="#计网" class="headerlink" title="计网"></a>计网</h2><p>网课：王道</p>
+<p>小林coding</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>网课：CMU15-445</p>
+<p>书籍：MySQL必知必会（REDIS？）</p>
+<p>小林coding</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>蓝桥杯真题库 + 代码随想录LeetCode + CODETOP</p>
+<p>每日两题</p>
+<h2 id="嵌入式"><a href="#嵌入式" class="headerlink" title="嵌入式"></a>嵌入式</h2><p>Linux原子哥</p>
+<h2 id="webserver项目"><a href="#webserver项目" class="headerlink" title="webserver项目"></a>webserver项目</h2><p>C++ set自定义排序问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class node &#123;</span><br><span class="line">public:</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">    int stime;</span><br><span class="line">    int fintime;</span><br><span class="line"></span><br><span class="line">    node(int xx, int yy, int st ,int ot) : x(xx), y(yy), stime(st), fintime(st + ot) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    bool operator &lt; (node n) const</span><br><span class="line">    &#123;</span><br><span class="line">        if (n.fintime != fintime)</span><br><span class="line">            return fintime &lt; n.fintime;</span><br><span class="line">        else if (x != n.x)</span><br><span class="line">            return x &lt; n.x;</span><br><span class="line">        else</span><br><span class="line">            return y &lt; n.y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool operator &lt; (const node* n) const</span><br><span class="line">    &#123;</span><br><span class="line">        if (n-&gt;fintime != fintime)</span><br><span class="line">            return fintime &lt; n-&gt;fintime;</span><br><span class="line">        else if (x != n-&gt;x)</span><br><span class="line">            return x &lt; n-&gt;x;</span><br><span class="line">        else</span><br><span class="line">            return y &lt; n-&gt;y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>&lt;</code> 运算符重载，如果<code>set&lt;node*&gt; nodes</code>，此时排序会出现混乱</p>
+<p>而定义<code>set&lt;node&gt; nodes</code>则不会，并且使用仿函数也正常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class comp&#123;</span><br><span class="line">public:</span><br><span class="line">bool operator()( const node&amp; l, const node&amp; r) const</span><br><span class="line">&#123;</span><br><span class="line">    if (l.fintime != r.fintime)</span><br><span class="line">        return l.fintime &lt; r.fintime;</span><br><span class="line">    else if (l.x != r.x)</span><br><span class="line">        return l.x &lt; r.x;</span><br><span class="line">    else</span><br><span class="line">        return l.y &lt; r.y;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>set&lt;node, comp&gt; nodes</code>或<code>set&lt;node*, comp&gt; nodes</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -181,7 +428,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-27 13:44:18" itemprop="dateModified" datetime="2023-02-27T13:44:18+08:00">2023-02-27</time>
+      <time title="修改时间：2023-10-11 10:35:43" itemprop="dateModified" datetime="2023-10-11T10:35:43+08:00">2023-10-11</time>
     </span>
 
   
@@ -413,7 +660,101 @@
 <p>If an optimal product contains a factor f &gt;&#x3D; 4, then you can replace it with factors 2 and f-2 without losing optimality, as 2*(f-2) &#x3D; 2f-4 &gt;&#x3D; f. So you never need a factor greater than or equal to 4, meaning you only need factors 1, 2 and 3 (and 1 is of course wasteful and you’d only use it for n&#x3D;2 and n&#x3D;3, where it’s needed).</p>
 <p>For the rest I agree, 3<em>3 is simply better than 2</em>2*2, so you’d never use 2 more than twice.、</p>
 </blockquote>
-<h1 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h1><h1 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h1><h1 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h1>
+<h1 id="股票系列-状态机DP"><a href="#股票系列-状态机DP" class="headerlink" title="股票系列(状态机DP)"></a>股票系列(状态机DP)</h1><h2 id="买卖股票的最佳时机"><a href="#买卖股票的最佳时机" class="headerlink" title="买卖股票的最佳时机"></a><strong><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">买卖股票的最佳时机</a></strong></h2><p>单笔交易的最大利润</p>
+<h3 id="DP-7"><a href="#DP-7" class="headerlink" title="DP"></a>DP</h3><p>用二维数组<code>dp</code>储存持有股票和非持有股票两种状态下的最大利润，</p>
+<ul>
+<li><p><code>dp[i][0]</code>表示当前不持有股票的最大利润，可得<code>dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])</code>，即继续保持前一天不持股的最大利润，或者是将前一天的股票卖出得今天的最大利润</p>
+</li>
+<li><p><code>dp[i][1]</code>表示当前持有股票的最大利润，可得<code>dp[i][1] = max(dp[i - 1][1], -prices[i])</code>，即继续保持前一天持股或持当天股的最大值，也就是保持最低买入股价</p>
+</li>
+<li><p>根据状态转移方程将<code>dp[0][0] = 0, dp[0][1] = -price[0]</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[0][1] = -prices[0];</span><br><span class="line">        for(int i = 1; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);</span><br><span class="line">            dp[i][1] = max(dp[i - 1][1], - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化DP"><a href="#优化DP" class="headerlink" title="优化DP"></a>优化DP</h3><p>两种状态更新过程中，只需要<code>dp[i - 1][0]</code>和<code>dp[i - 1][1]</code>两个值，那么即可用两个变量代替二维数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int f0 = 0, f1 = -prices[0];</span><br><span class="line">        for(const auto&amp; price : prices)</span><br><span class="line">        &#123;</span><br><span class="line">        	f1 = max(f1, -price);</span><br><span class="line">        	f0 = max(f0, f1 + price);</span><br><span class="line">        &#125;</span><br><span class="line">        return f0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="### 买卖股票的最佳时机 II"></a>### <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></h2><p>多笔交易的最大利润</p>
+<h3 id="DP-8"><a href="#DP-8" class="headerlink" title="DP"></a>DP</h3><p>用二维数组<code>dp</code>储存持有股票和非持有股票两种状态下的最大利润</p>
+<ul>
+<li><p><code>dp[i][0]</code>表示当前不持有股票的最大利润，可得<code>dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])</code>，即继续保持前一天不持股的最大利润，或者是将前一天的股票卖出得今天的最大利润</p>
+</li>
+<li><p><code>dp[i][1]</code>表示当前持有股票的最大利润，可得<code>dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])</code>，即继续保持前一天持股，或者将前一天持的股卖出获得利润，同一天入股的最大利润</p>
+</li>
+<li><p>根据状态转移方程将<code>dp[0][0] = 0, dp[0][1] = -price[0]</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[0][1] = -prices[0];</span><br><span class="line">        for(int i = 1; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);</span><br><span class="line">            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化DP-1"><a href="#优化DP-1" class="headerlink" title="优化DP"></a>优化DP</h3><p>同样地，在更新过程中只用到了<code>dp[i - 1][0]</code>和<code>dp[i - 1][1]</code>两个值，用两个变量代替二维数组，另外还需要一个变量保存中间值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        f0 = 0, f1 = -prices[0], tmp = 0;</span><br><span class="line">        for(const auto &amp; price : prices)</span><br><span class="line">        &#123;</span><br><span class="line">        	tmp = f0;</span><br><span class="line">        	f0 = max(f0, f1 + price);</span><br><span class="line">        	f1 = max(f1, tmp - price);</span><br><span class="line">        &#125;</span><br><span class="line">        return f0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="贪心解法"><a href="#贪心解法" class="headerlink" title="贪心解法"></a>贪心解法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int res = 0;</span><br><span class="line">        for(int i = 0; i &lt; n - 1; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(prices[i + 1] &gt; prices[i])</span><br><span class="line">                res += prices[i + 1] - prices[i];</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖股票的最佳时机含冷冻期"><a href="#买卖股票的最佳时机含冷冻期" class="headerlink" title="买卖股票的最佳时机含冷冻期"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">买卖股票的最佳时机含冷冻期</a></h2><p>卖出股票后不能在第二天买入股票</p>
+<h3 id="DP-9"><a href="#DP-9" class="headerlink" title="DP"></a>DP</h3><p>用二维数组<code>dp</code>储存持有股票和非持有股票两种状态下的最大利润</p>
+<ul>
+<li><p><code>dp[i][0]</code>表示当前不持有股票的最大利润，可得<code>dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])</code>，即继续保持前一天不持股的最大利润，或者是将前一天的股票卖出得今天的最大利润</p>
+</li>
+<li><p><code>dp[i][1]</code>表示当前持有股票的最大利润，由题意有一天的冷冻期可得<code>dp[i][1] = max(dp[i - 1][1], dp[i - 2][0] - prices[i])</code>，即继续保持前一天持股，或者将两天前持的股卖出获得利润，然后在当天入股的最大利润</p>
+</li>
+<li><p>根据状态转移方程将<code>dp[0][0] = 0, dp[0][1] = -price[0]</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/*BUGGY*/</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[0][1] = -prices[0];</span><br><span class="line">        for (int i = 1; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);</span><br><span class="line">            if (i - 2 &gt;= 0)</span><br><span class="line">                dp[i][1] = max(dp[i - 1][1], dp[i - 2][0] - prices[i]);</span><br><span class="line">            else</span><br><span class="line">                dp[i][1] = dp[i - 1][1];</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在考虑一个长度为3的数组作输入时，如[2, 1, 4]，初始值被设为第一天的利润，当i&#x3D;1时并没有更新，显然不合理，对此，可以将else 语句改为<code>dp[i][1] = max(dp[i - 1][1], prices[i])</code>；另外，也可以不增加额外的判断语句，将二维数组长度更改为<code>dp[n + 1][2]</code>或者<code>dp[n + 2][2]</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">-----dp[n+1][2]-----</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n + 1][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[0][1] = -prices[0];</span><br><span class="line">        for (int i = 0; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i + 1][0] = max(dp[i][0], dp[i][1] + prices[i]);</span><br><span class="line">            if(i - 1 &gt;= 0)</span><br><span class="line">                dp[i + 1][1] = max(dp[i][1], dp[i - 1][0] - prices[i]);</span><br><span class="line">            else</span><br><span class="line">                dp[i + 1][1] = dp[i][1];</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">-----dp[n+2][2]-----</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n + 2][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[1][1] = -prices[0];</span><br><span class="line">        for (int i = 0; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i + 2][0] = max(dp[i + 1][0], dp[i + 1][1] + prices[i]);</span><br><span class="line">            dp[i + 2][1] = max(dp[i + 1][1], dp[i][0] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n + 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化DP-2"><a href="#优化DP-2" class="headerlink" title="优化DP"></a>优化DP</h3><p>可以观察到，更新二维数组时，只用到<code>dp[i - 1][0]</code>,<code>dp[i - 1][1]</code>和<code>dp[i - 2][0]</code>三个值，即可以用三个变量代替二维数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int f0 = 0, f1 = -prices[0], last = 0, tmp = 0, second = 0;</span><br><span class="line">        for (const auto&amp; price : prices)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = f0;</span><br><span class="line">            f0 = max(f0, f1 + price);</span><br><span class="line">            f1 = max(f1, second - price);</span><br><span class="line">            second = last;</span><br><span class="line">            last = f0;</span><br><span class="line">        &#125;</span><br><span class="line">        return f0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖股票的最佳时机含手续费"><a href="#买卖股票的最佳时机含手续费" class="headerlink" title="买卖股票的最佳时机含手续费"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">买卖股票的最佳时机含手续费</a></h2><p>无限制次数交易，但每笔交易需要手续费，是买卖股票的最佳时机II的变形题</p>
+<h3 id="DP-10"><a href="#DP-10" class="headerlink" title="DP"></a><strong>DP</strong></h3><p>用二维数组<code>dp</code>储存持有股票和非持有股票两种状态下的最大利润</p>
+<ul>
+<li><p><code>dp[i][0]</code>表示当前不持有股票的最大利润，可得<code>dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])</code>，即继续保持前一天不持股的最大利润，或者是将前一天的股票卖出得今天的最大利润</p>
+</li>
+<li><p><code>dp[i][1]</code>表示当前持有股票的最大利润，可得<code>dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])</code>，即继续保持前一天持股，或者将前一天持的股卖出获得利润，当天入股的最大利润</p>
+</li>
+<li><p>根据状态转移方程将<code>dp[0][0] = 0, dp[0][1] = -price[0]</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices, int fee) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n][2];</span><br><span class="line">        memset(dp, 0, sizeof dp);</span><br><span class="line">        dp[0][0] = 0, dp[0][1] = -prices[0];</span><br><span class="line">        for(int i = 1; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);</span><br><span class="line">            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="买卖股票的最佳时机-IV"><a href="#买卖股票的最佳时机-IV" class="headerlink" title="买卖股票的最佳时机 IV"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">买卖股票的最佳时机 IV</a></h2><p>最多完成k笔交易，需要增加一种状态表示交易数</p>
+<h3 id="DFS递归-记忆化"><a href="#DFS递归-记忆化" class="headerlink" title="DFS递归+记忆化"></a>DFS递归+记忆化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(int k, vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int memo[n+1][k+2][2];</span><br><span class="line">        memset(memo, -1, sizeof memo);</span><br><span class="line"></span><br><span class="line">        function&lt;int (int, int, bool)&gt; dfs = [&amp;](int i, int j, bool flag)-&gt; int&#123;</span><br><span class="line">            if(j &lt; 0) // 交易次数为负，返回INT_MIN</span><br><span class="line">                return INT_MIN;</span><br><span class="line">            if(i &lt; 0) // 初始化时并没有利润，返回INT_MIN或0</span><br><span class="line">                return flag ? INT_MIN : 0;</span><br><span class="line">            if(memo[i][j][flag] != -1)</span><br><span class="line">                return memo[i][j][flag];</span><br><span class="line">            if(flag) // 持有股票</span><br><span class="line">            &#123;</span><br><span class="line">                memo[i][j][flag] = max(dfs(i - 1, j, 1), dfs(i - 1, j, 0) - prices[i]);</span><br><span class="line">                return memo[i][j][flag];</span><br><span class="line">            &#125;</span><br><span class="line">            memo[i][j][flag] = max(dfs(i - 1, j, 0), dfs(i - 1, j - 1, 1) + prices[i]);</span><br><span class="line">            return memo[i][j][flag];</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return dfs(n - 1, k, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>递归结束条件：交易次数不足 或 遍历完所有天数的股票，前者返回负无穷，后者返回0或负无穷作为从头开始搜索的初始条件——不持股票状态下，最大利润为0；持股票时，最大利润为负无穷</p>
+<h3 id="DP-11"><a href="#DP-11" class="headerlink" title="DP"></a><strong>DP</strong></h3><p>用三维数组<code>dp</code>储存持股和交易次数两大类状态下的最大利润</p>
+<ul>
+<li><p><code>dp[i][j][0]</code>表示当前<strong>不持有股票</strong>，<strong>交易次数为j (j &lt;&#x3D; k)<strong>时的最大利润，可得<code>dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j - 1][1] + prices[i])</code>，即继续保持前一天的最大利润，</strong>不持股也不交易</strong>，或者是<strong>在前一天持股，当天卖出状态下</strong>的最大利润</p>
+</li>
+<li><p><code>dp[i][j][1]</code>表示当前**持有股票，交易次数为j (j &lt;&#x3D; k)**的最大利润，可得<code>dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j][0] - prices[i])</code>，即继续保持前一天持股不交易，或者**在前一天不持股，当天购入状态下的最大利润**。<u>统一将卖出股票时才算交易完成，交易次数+1</u></p>
+</li>
+<li><p>根据状态转移方程，三维数组元素初始化为大负数（由题目数据量可知&lt;1000），再将<code>dp[0][j][0] = 0</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(int k, vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n + 1][k + 2][2]; // [-1, k] 避免 k = -1 情况，整体右移； i同理</span><br><span class="line">        memset(dp, -0x7f, sizeof dp);// 全都初始化为INT_MIN</span><br><span class="line">        // fill_n(dp, (n+1)*2*(k+2), INT_MIN); </span><br><span class="line">        for(int j = 0; j &lt; k + 2; j++) // 在交易次数为0且不持股时，最大利润初始化为0</span><br><span class="line">        // &#123;</span><br><span class="line">            // dp[1][j][0] = 0;</span><br><span class="line">            // dp[1][j][1] = -prices[0];</span><br><span class="line">        // &#125;</span><br><span class="line">            dp[0][j][0] = 0;</span><br><span class="line">        // dp[0][j][1]? ---&gt; 需要 i 从 0 开始遍历</span><br><span class="line">        for(int i = 0; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j = 1; j &lt; k + 2; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i + 1][j][0] = max(dp[i][j][0], dp[i][j - 1][1] + prices[i]);</span><br><span class="line">                dp[i + 1][j][1] = max(dp[i][j][1], dp[i][j][0] - prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][k + 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>由DFS翻译成递推，可得初始条件为<code>dp[0][j][0] = 0, dp[0][j][1] = -prices[0]</code>，可以从<code>i=1</code>开始遍历而不是<code>i=0</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(int k, vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n + 1][k + 2][2]; // [-1, k] 避免 k = -1 情况，整体右移； i同理</span><br><span class="line">        memset(dp, -0x7f, sizeof dp);// 全都初始化为INT_MIN</span><br><span class="line">        // fill_n(dp, (n+1)*2*(k+2), INT_MIN); </span><br><span class="line">        for(int j = 0; j &lt; k + 2; j++) // 在交易次数为0且不持股时，最大利润初始化为0</span><br><span class="line">        &#123;</span><br><span class="line">            dp[0][j][0] = 0;</span><br><span class="line">            dp[0][j][1] = -prices[0];</span><br><span class="line">        &#125;</span><br><span class="line">            // dp[0][j][0] = 0;</span><br><span class="line">        // dp[0][j][1]? ---&gt; 需要 i 从 0 开始遍历</span><br><span class="line">        for(int i = 1; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j = 1; j &lt; k + 2; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j - 1][1] + prices[i - 1]);</span><br><span class="line">                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j][0] - prices[i - 1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][k + 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖股票的最佳时机-III"><a href="#买卖股票的最佳时机-III" class="headerlink" title="买卖股票的最佳时机 III"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">买卖股票的最佳时机 III</a></h2><p>最多完成两笔交易，固定数组第三维为3，表示交易的次数</p>
+<h3 id="DP-12"><a href="#DP-12" class="headerlink" title="DP"></a><strong>DP</strong></h3><p>用三维数组<code>dp</code>储存持股和交易次数两大类状态下的最大利润</p>
+<ul>
+<li><p><code>dp[i][j][0]</code>表示当前<strong>不持有股票</strong>，<strong>交易次数为j (j &lt;&#x3D; 2)<strong>时的最大利润，可得<code>dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j - 1][1] + prices[i])</code>，即继续保持前一天的最大利润，</strong>不持股也不交易</strong>，或者是<strong>在前一天持股，当天卖出状态下</strong>的最大利润</p>
+</li>
+<li><p><code>dp[i][j][1]</code>表示当前**持有股票，交易次数为j (j &lt;&#x3D; 2)**的最大利润，可得<code>dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j][0] - prices[i])</code>，即继续保持前一天持股不交易，或者**在前一天不持股，当天购入状态下的最大利润**。<u>统一将卖出股票时才算交易完成，交易次数+1</u></p>
+</li>
+<li><p>根据状态转移方程，三维数组元素初始化为大负数（由题目数据量可知&lt;100000），再将<code>dp[0][j][0] = 0</code>作为初始值</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n = prices.size();</span><br><span class="line">        int dp[n + 1][4][2]; // [-1, k] 避免 k = -1 情况，整体右移； i同理</span><br><span class="line">        memset(dp, -0x7f, sizeof dp);// 全都初始化为INT_MIN</span><br><span class="line">        // fill_n(dp, (n+1)*2*(k+2), INT_MIN); </span><br><span class="line">        for(int j = 0; j &lt; 4; j++) // 在交易次数为0且不持股时，最大利润初始化为0</span><br><span class="line">        // &#123;</span><br><span class="line">            // dp[1][j][0] = 0;</span><br><span class="line">            // dp[1][j][1] = -prices[0];</span><br><span class="line">        // &#125;</span><br><span class="line">            dp[0][j][0] = 0;</span><br><span class="line">        // dp[0][j][1]? ---&gt; 需要 i 从 0 开始遍历</span><br><span class="line">        for(int i = 0; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j = 1; j &lt; 4; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i + 1][j][0] = max(dp[i][j][0], dp[i][j - 1][1] + prices[i]);</span><br><span class="line">                dp[i + 1][j][1] = max(dp[i][j][1], dp[i][j][0] - prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][3][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -4485,7 +4826,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
