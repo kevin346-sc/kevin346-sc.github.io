@@ -1,24 +1,24 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"kevin346-sc.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Kevin Huang">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="数组章节二分查找二分查找模板题1234567891011121314151617class Solution &amp;#123;public:    int search(vector&lt;int&gt;&amp; nums, int target) &amp;#123;        int l &#x3D; 0, r &#x3D; nums.size() - 1;        while(l &lt;&#x3D; r)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode数组章节">
@@ -29,311 +29,642 @@
 <meta property="article:published_time" content="2023-04-24T07:13:04.000Z">
 <meta property="article:modified_time" content="2023-04-25T07:08:02.623Z">
 <meta property="article:author" content="Kevin Huang">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Leetcode数组章节 - Serein’s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<link rel="canonical" href="https://kevin346-sc.github.io/2023/04/24/Leetcode%E6%95%B0%E7%BB%84%E7%AB%A0%E8%8A%82/">
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kevin346-sc.github.io/2023/04/24/Leetcode%E6%95%B0%E7%BB%84%E7%AB%A0%E8%8A%82/","path":"2023/04/24/Leetcode数组章节/","title":"Leetcode数组章节"}</script>
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Leetcode数组章节 | Serein’s Blog</title>
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"kevin346-sc.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
 
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
+<body>
+  
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+  <header>
+    
 
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Serein’s Blog</p>
-      <i class="logo-line"></i>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
     </a>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-    </div>
-  </div>
-</div>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-
-
-
-
-
-
-</header>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
       </ul>
+    </div>
+  </div>
+</nav>
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%AB%A0%E8%8A%82"><span class="nav-number">1.</span> <span class="nav-text">数组章节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.1.</span> <span class="nav-text">二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A8%A1%E6%9D%BF%E9%A2%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">二分查找模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lower-bound%E5%92%8Cupper-bound%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">lower_bound和upper_bound的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E5%80%BC%E7%AD%89%E4%BA%8Etarget%E7%9A%84%E5%8C%BA%E9%97%B4"><span class="nav-number">1.1.3.</span> <span class="nav-text">找到值等于target的区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA-%E9%80%86%E5%BA%8F%E6%8E%92%E5%BA%8F-%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E-%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">1.1.4.</span> <span class="nav-text">找到第一个(逆序排序) 小于等于 的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9"><span class="nav-number">1.1.5.</span> <span class="nav-text">x的平方根</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E2%80%94%E2%80%94%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.2.</span> <span class="nav-text">双指针——滑动窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.1.</span> <span class="nav-text">移动元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">有序数组的平方</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%931"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">总结1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">删除有序数组中的重复项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9-II"><span class="nav-number">1.2.4.</span> <span class="nav-text">删除有序数组中的重复项 II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%932"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">总结2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.5.</span> <span class="nav-text"> 长度最小的子数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2"><span class="nav-number">1.2.6.</span> <span class="nav-text"> 最小覆盖子串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE"><span class="nav-number">1.2.7.</span> <span class="nav-text">水果成篮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-number">1.2.8.</span> <span class="nav-text">无重复字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%933"><span class="nav-number">1.2.8.1.</span> <span class="nav-text">总结3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E2%80%94%E2%80%94%E5%9B%BA%E5%AE%9A%E7%AA%97%E5%8F%A3"><span class="nav-number">1.3.</span> <span class="nav-text">双指针——固定窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F"><span class="nav-number">1.4.</span> <span class="nav-text">模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5"><span class="nav-number">1.4.1.</span> <span class="nav-text"> 螺旋矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II"><span class="nav-number">1.4.2.</span> <span class="nav-text">螺旋矩阵 II</span></a></li></ol></li></ol></li></ol></div>
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Leetcode数组章节"></span>
+          
         </div>
-        <!--/noindex-->
 
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Kevin Huang</p>
-  <div class="site-description" itemprop="description">c++</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">19</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-24 15:13" pubdate>
+          2023年4月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
+
+      
+    </div>
+  </div>
 </div>
 
-        </div>
-      </div>
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
     </div>
 
-    
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kevin346-sc.github.io/2023/04/24/Leetcode%E6%95%B0%E7%BB%84%E7%AB%A0%E8%8A%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Kevin Huang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Serein’s Blog">
-      <meta itemprop="description" content="c++">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Leetcode数组章节 | Serein’s Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Leetcode数组章节
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-24 15:13:04" itemprop="dateCreated datePublished" datetime="2023-04-24T15:13:04+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-25 15:08:02" itemprop="dateModified" datetime="2023-04-25T15:08:02+08:00">2023-04-25</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="数组章节"><a href="#数组章节" class="headerlink" title="数组章节"></a>数组章节</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="二分查找模板题"><a href="#二分查找模板题" class="headerlink" title="二分查找模板题"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">二分查找模板题</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int search(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        while(l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if(nums[mid] &lt; target)</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            else if(nums[mid] &gt; target)</span><br><span class="line">                r = mid - 1;</span><br><span class="line">            else</span><br><span class="line">                return mid;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Leetcode数组章节</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数组章节"><a href="#数组章节" class="headerlink" title="数组章节"></a>数组章节</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="二分查找模板题"><a href="#二分查找模板题" class="headerlink" title="二分查找模板题"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">二分查找模板题</a></h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">int</span> search(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums, <span class="hljs-built_in">int</span> <span class="hljs-keyword">target</span>) &#123;<br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)<br>        &#123;<br>            <span class="hljs-built_in">int</span> mid = (l + r) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[mid] &lt; <span class="hljs-keyword">target</span>)<br>                l = mid + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid] &gt; <span class="hljs-keyword">target</span>)<br>                r = mid - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span><br>                <span class="hljs-keyword">return</span> mid;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>其中，变形题可根据不同的判断条件进行判断，如将三种情况重新分成两种等</p>
 <h3 id="lower-bound和upper-bound的实现"><a href="#lower-bound和upper-bound的实现" class="headerlink" title="lower_bound和upper_bound的实现"></a><code>lower_bound</code>和<code>upper_bound</code>的实现</h3><p><code>lower_bound</code>—返回第一个 大于等于 的元素</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int search(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        int ans = -1;</span><br><span class="line">        while (l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if (nums[mid] &gt;= target)</span><br><span class="line">            &#123;</span><br><span class="line">                r = mid - 1; // 可能左边还有值等于target的元素</span><br><span class="line">                ans = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                l = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">int</span> search(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums, <span class="hljs-built_in">int</span> <span class="hljs-keyword">target</span>) &#123;<br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> ans = -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r)<br>        &#123;<br>            <span class="hljs-built_in">int</span> mid = (l + r) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &gt;= <span class="hljs-keyword">target</span>)<br>            &#123;<br>                r = mid - <span class="hljs-number">1</span>; // 可能左边还有值等于<span class="hljs-keyword">target</span>的元素<br>                ans = mid;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>                l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p><code>upper_bound</code>—返回第一个 大于 的元素</p>
 <p>类似，第一个 大于 的元素则判断条件中 遇到 小于等于 的元素时执行<code>l = mid + 1</code>， 遇到大于的元素 记录<code>ans</code>的同时<code>r = mid - 1</code>，因为左边可能还有值 大于 的元素</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int search(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        int ans = -1;</span><br><span class="line">        while (l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if (nums[mid] &lt;= target)</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">            	r = mid - 1;</span><br><span class="line">            	ans =mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">int</span> search(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums, <span class="hljs-built_in">int</span> <span class="hljs-keyword">target</span>) &#123;<br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> ans = -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r)<br>        &#123;<br>            <span class="hljs-built_in">int</span> mid = (l + r) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (nums[mid] &lt;= <span class="hljs-keyword">target</span>)<br>                l = mid + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>            	r = mid - <span class="hljs-number">1</span>;<br>            	ans =mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h3 id="找到值等于target的区间"><a href="#找到值等于target的区间" class="headerlink" title="找到值等于target的区间"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">找到值等于target的区间</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int binary_search(vector&lt;int&gt;&amp; nums, int target)</span><br><span class="line">    &#123;</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        int ans = -1;</span><br><span class="line">        while (l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if (nums[mid] &gt;= target)</span><br><span class="line">            &#123;</span><br><span class="line">                r = mid - 1; // 可能左边还有值等于target的元素</span><br><span class="line">                ans = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                l = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int n = nums.size() - 1;</span><br><span class="line">        if(n &lt; 0)   return &#123;-1, -1&#125;;</span><br><span class="line">        int st = -1, en = -1;</span><br><span class="line">        st = binary_search(nums, target);</span><br><span class="line">        en = binary_search(nums, target + 1);</span><br><span class="line">        if(st == en) // 数组中找不到相等的元素</span><br><span class="line">            return &#123;-1, -1&#125;;</span><br><span class="line">        else if(en == -1) // 找到相等的元素但没有比target更大的元素</span><br><span class="line">            return &#123;st, n&#125;;</span><br><span class="line">        else</span><br><span class="line">            return &#123;st, en - 1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="找到值等于target的区间"><a href="#找到值等于target的区间" class="headerlink" title="找到值等于target的区间"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">找到值等于target的区间</a></h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;<br>public:<br>    <span class="hljs-built_in">int</span> binary<span class="hljs-constructor">_search(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&amp; <span class="hljs-params">nums</span>, <span class="hljs-params">int</span> <span class="hljs-params">target</span>)</span><br>    &#123;<br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = nums.size<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> ans = -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r)<br>        &#123;<br>            <span class="hljs-built_in">int</span> mid = (l + r)<span class="hljs-operator"> / </span><span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (nums<span class="hljs-literal">[<span class="hljs-identifier">mid</span>]</span> &gt;= target)<br>            &#123;<br>                r = mid - <span class="hljs-number">1</span>; <span class="hljs-comment">// 可能左边还有值等于target的元素</span><br>                ans = mid;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>                l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        return ans;<br>    &#125;<br>    vector&lt;<span class="hljs-built_in">int</span>&gt; search<span class="hljs-constructor">Range(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&amp; <span class="hljs-params">nums</span>, <span class="hljs-params">int</span> <span class="hljs-params">target</span>)</span> &#123;<br>        <span class="hljs-built_in">int</span> n = nums.size<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">0</span>)   return &#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br>        <span class="hljs-built_in">int</span> st = -<span class="hljs-number">1</span>, en = -<span class="hljs-number">1</span>;<br>        st = binary<span class="hljs-constructor">_search(<span class="hljs-params">nums</span>, <span class="hljs-params">target</span>)</span>;<br>        en = binary<span class="hljs-constructor">_search(<span class="hljs-params">nums</span>, <span class="hljs-params">target</span> + 1)</span>;<br>        <span class="hljs-keyword">if</span>(st<span class="hljs-operator"> == </span>en) <span class="hljs-comment">// 数组中找不到相等的元素</span><br>            return &#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(en<span class="hljs-operator"> == </span>-<span class="hljs-number">1</span>) <span class="hljs-comment">// 找到相等的元素但没有比target更大的元素</span><br>            return &#123;st, n&#125;;<br>        <span class="hljs-keyword">else</span><br>            return &#123;st, en - <span class="hljs-number">1</span>&#125;;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>应用 <code>lower_bound</code>的实现（找到第一个 大于等于 的元素），通过寻找区间首元素和尾元素的位置判断，传入不同的target值， 即可实现；但不能用 <code>upper_bound</code>来实现，因为<code>st = binary_search(nums, target - 1), en = binary_search(nums, target)</code>中，想要得知数组中 是否存在与target值相等的元素 与 当en为尾后元素时 冲突，例如<code>[5,7,7], target = 6</code>和<code>[2,2], target = 2</code></p>
-<h3 id="找到第一个-逆序排序-小于等于-的元素"><a href="#找到第一个-逆序排序-小于等于-的元素" class="headerlink" title="找到第一个(逆序排序) 小于等于 的元素"></a>找到第一个(逆序排序) 小于等于 的元素</h3><h3 id="x的平方根"><a href="#x的平方根" class="headerlink" title="x的平方根"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sqrtx/">x的平方根</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int mySqrt(int x) &#123;</span><br><span class="line">        int l = 0, r = x, ans = -1;</span><br><span class="line">        while (l &lt;= r) &#123;</span><br><span class="line">            int mid = l + (r - l) / 2;</span><br><span class="line">            if ((long long)mid * mid &lt;= x) &#123;</span><br><span class="line">                ans = mid;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                r = mid - 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="找到第一个-逆序排序-小于等于-的元素"><a href="#找到第一个-逆序排序-小于等于-的元素" class="headerlink" title="找到第一个(逆序排序) 小于等于 的元素"></a>找到第一个(逆序排序) 小于等于 的元素</h3><h3 id="x的平方根"><a href="#x的平方根" class="headerlink" title="x的平方根"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sqrtx/">x的平方根</a></h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mySqrt</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = x, ans = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span> (l &lt;= r) &#123;<br>            <span class="hljs-type">int</span> mid = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> ((<span class="hljs-type">long</span> <span class="hljs-type">long</span>)mid * mid &lt;= x) &#123;<br>                ans = mid;<br>                l = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>(当从小到大排序时)与上述不同，这一题要求的是 小于等于 的元素，则判断条件中当遇到 小于等于 的元素时，记录该元素同时<code>l = mid + 1</code>，因为右边可能还有 小于等于 的元素；而当遇到大于的元素，则直接<code>r = mid - 1</code>不用记录</p>
 <h2 id="双指针——滑动窗口"><a href="#双指针——滑动窗口" class="headerlink" title="双指针——滑动窗口"></a>双指针——滑动窗口</h2><h3 id="移动元素"><a href="#移动元素" class="headerlink" title="移动元素"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">移动元素</a></h3><p>使用双指针在O(n)时间复杂度和O(1)空间复杂度下实现</p>
 <p>同向遍历，即快慢指针实现，r指针遍历数组，不断的将r遍历到的不需要删除的元素赋值到l中，同时l++，当r遇到需要删除的元素则跳过，再次遇到不需要删除元素时，覆盖到l上，并逐一将后续需要的元素按顺序覆盖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        // 同向遍历</span><br><span class="line">        int l = 0, r = 0;</span><br><span class="line">        for(r; r &lt; nums.size(); r++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[r] != val) // 需要删除的元素</span><br><span class="line">            &#123;</span><br><span class="line">                nums[l] = nums[r];</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;<br>public:<br>    <span class="hljs-built_in">int</span> remove<span class="hljs-constructor">Element(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&amp; <span class="hljs-params">nums</span>, <span class="hljs-params">int</span> <span class="hljs-params">val</span>)</span> &#123;<br>        <span class="hljs-comment">// 同向遍历</span><br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(r; r &lt; nums.size<span class="hljs-literal">()</span>; r++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums<span class="hljs-literal">[<span class="hljs-identifier">r</span>]</span> != <span class="hljs-keyword">val</span>) <span class="hljs-comment">// 需要删除的元素</span><br>            &#123;<br>                nums<span class="hljs-literal">[<span class="hljs-identifier">l</span>]</span> = nums<span class="hljs-literal">[<span class="hljs-identifier">r</span>]</span>;<br>                l++;<br>            &#125;<br>        &#125;<br>        return l;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>对向遍历，当l指针遇到需要删除的元素时与r指针交换，同时r–，此时，有可能r指针也指向需要删除的元素，因此这一轮中l指针不动，只移动r指针，也就在下一轮中再次判断l指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        // 对向遍历</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        while(l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[l] == val) // 需要删除的元素</span><br><span class="line">            &#123;</span><br><span class="line">                swap(nums[l], nums[r--]);</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                l++;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">removeElement</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        <span class="hljs-comment">// 对向遍历</span><br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums[l] == val) <span class="hljs-comment">// 需要删除的元素</span><br>            &#123;<br>                <span class="hljs-built_in">swap</span>(nums[l], nums[r--]);<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>                l++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> l;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h3 id="有序数组的平方"><a href="#有序数组的平方" class="headerlink" title="有序数组的平方"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">有序数组的平方</a></h3><p>首先利用有序性，找到负数与非负数的分界线，从分界线开始向左右两边使用双指针遍历，其中，寻找分界线时可以使用二分法进行加速查找；或者从数组两端开始遍历并比较，最后则需要将数组逆序输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">// 从分界线开始遍历</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        if(nums.size()==1)</span><br><span class="line">            return &#123;nums[0]*nums[0]&#125;;</span><br><span class="line">        // 先找零 或者最小的正数</span><br><span class="line">        int l = 0, r = nums.size() - 1;</span><br><span class="line">        int ind = nums.size() - 1;</span><br><span class="line">        while(l &lt;= r)</span><br><span class="line">        &#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if(nums[mid] &gt;= 0)</span><br><span class="line">            &#123;</span><br><span class="line">                ind = mid;</span><br><span class="line">                r = mid - 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">                l = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        l = ind - 1, r = ind;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line"></span><br><span class="line">        while(l &gt;= 0 &amp;&amp; r &lt; nums.size())</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[l]*nums[l] &lt; nums[r]*nums[r])</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(nums[l]*nums[l]);</span><br><span class="line">                l--;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(nums[r]*nums[r]);</span><br><span class="line">                r++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(l &gt;= 0)</span><br><span class="line">        &#123;</span><br><span class="line">            res.push_back(nums[l]*nums[l]);</span><br><span class="line">            l--;</span><br><span class="line">        &#125;</span><br><span class="line">        while(r &lt; nums.size())</span><br><span class="line">        &#123;</span><br><span class="line">            res.push_back(nums[r]*nums[r]);</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 从两端开始遍历</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int i = 0, j = n - 1;</span><br><span class="line">        while(i &lt; j)</span><br><span class="line">        &#123;</span><br><span class="line">            if(abs(nums[i]) &gt; nums[j])</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(nums[i] * nums[i]);</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(nums[j] * nums[j]);</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.push_back(nums[i]*nums[i]);</span><br><span class="line">        reverse(res.begin(), res.end());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">// 从分界线开始遍历</span><br><span class="hljs-keyword">class</span> Solution &#123;<br>public:<br>    vector&lt;<span class="hljs-built_in">int</span>&gt; sorted<span class="hljs-constructor">Squares(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&amp; <span class="hljs-params">nums</span>)</span> &#123;<br>        <span class="hljs-keyword">if</span>(nums.size<span class="hljs-literal">()</span>==<span class="hljs-number">1</span>)<br>            return &#123;nums<span class="hljs-literal">[<span class="hljs-number">0</span>]</span>*nums<span class="hljs-literal">[<span class="hljs-number">0</span>]</span>&#125;;<br>        <span class="hljs-comment">// 先找零 或者最小的正数</span><br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">0</span>, r = nums.size<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> ind = nums.size<span class="hljs-literal">()</span> - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)<br>        &#123;<br>            <span class="hljs-built_in">int</span> mid = (l + r)<span class="hljs-operator"> / </span><span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums<span class="hljs-literal">[<span class="hljs-identifier">mid</span>]</span> &gt;= <span class="hljs-number">0</span>)<br>            &#123;<br>                ind = mid;<br>                r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>                l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        l = ind - <span class="hljs-number">1</span>, r = ind;<br>        vector&lt;<span class="hljs-built_in">int</span>&gt; res;<br><br>        <span class="hljs-keyword">while</span>(l &gt;= <span class="hljs-number">0</span><span class="hljs-operator"> &amp;&amp; </span>r &lt; nums.size<span class="hljs-literal">()</span>)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums<span class="hljs-literal">[<span class="hljs-identifier">l</span>]</span>*nums<span class="hljs-literal">[<span class="hljs-identifier">l</span>]</span> &lt; nums<span class="hljs-literal">[<span class="hljs-identifier">r</span>]</span>*nums<span class="hljs-literal">[<span class="hljs-identifier">r</span>]</span>)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">l</span>]<span class="hljs-operator">*</span><span class="hljs-params">nums</span>[<span class="hljs-params">l</span>])</span>;<br>                l--;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">r</span>]<span class="hljs-operator">*</span><span class="hljs-params">nums</span>[<span class="hljs-params">r</span>])</span>;<br>                r++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(l &gt;= <span class="hljs-number">0</span>)<br>        &#123;<br>            res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">l</span>]<span class="hljs-operator">*</span><span class="hljs-params">nums</span>[<span class="hljs-params">l</span>])</span>;<br>            l--;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(r &lt; nums.size<span class="hljs-literal">()</span>)<br>        &#123;<br>            res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">r</span>]<span class="hljs-operator">*</span><span class="hljs-params">nums</span>[<span class="hljs-params">r</span>])</span>;<br>            r++;<br>        &#125;<br>        return res;<br>    &#125;<br>&#125;;<br><br><br><br><span class="hljs-comment">// 从两端开始遍历</span><br><span class="hljs-keyword">class</span> Solution &#123;<br>public:<br>    vector&lt;<span class="hljs-built_in">int</span>&gt; sorted<span class="hljs-constructor">Squares(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&amp; <span class="hljs-params">nums</span>)</span> &#123;<br>        vector&lt;<span class="hljs-built_in">int</span>&gt; res;<br>        <span class="hljs-built_in">int</span> n = nums.size<span class="hljs-literal">()</span>;<br>        <span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>, j = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(i &lt; j)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(abs(nums<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>) &gt; nums<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">i</span>] <span class="hljs-operator">*</span> <span class="hljs-params">nums</span>[<span class="hljs-params">i</span>])</span>;<br>                i++;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">j</span>] <span class="hljs-operator">*</span> <span class="hljs-params">nums</span>[<span class="hljs-params">j</span>])</span>;<br>                j--;<br>            &#125;<br>        &#125;<br>        res.push<span class="hljs-constructor">_back(<span class="hljs-params">nums</span>[<span class="hljs-params">i</span>]<span class="hljs-operator">*</span><span class="hljs-params">nums</span>[<span class="hljs-params">i</span>])</span>;<br>        reverse(res.<span class="hljs-keyword">begin</span><span class="hljs-literal">()</span>, res.<span class="hljs-keyword">end</span><span class="hljs-literal">()</span>);<br>        return res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h4 id="总结1"><a href="#总结1" class="headerlink" title="总结1"></a>总结1</h4><p>通常，在使用快慢指针时，用快指针遍历数组并判断是否符合条件，而不是用慢指针，因此是判断<code>if(nums[r] != val)</code>而不是<code>if(val == nums[l]</code>，否则会miss掉一些值</p>
-<h3 id="删除有序数组中的重复项"><a href="#删除有序数组中的重复项" class="headerlink" title="删除有序数组中的重复项"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">删除有序数组中的重复项</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        if(nums.size() == 1)    return 1;</span><br><span class="line">        int l = 1;</span><br><span class="line">        for(int r = 1; r &lt; nums.size(); r++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[r] &gt; nums[r - 1])</span><br><span class="line">                nums[l++] = nums[r];</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="删除有序数组中的重复项"><a href="#删除有序数组中的重复项" class="headerlink" title="删除有序数组中的重复项"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">删除有序数组中的重复项</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> r = <span class="hljs-number">1</span>; r &lt; nums.<span class="hljs-built_in">size</span>(); r++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums[r] &gt; nums[r - <span class="hljs-number">1</span>])<br>                nums[l++] = nums[r];<br>        &#125;<br>        <span class="hljs-keyword">return</span> l;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h3 id="删除有序数组中的重复项-II"><a href="#删除有序数组中的重复项-II" class="headerlink" title="删除有序数组中的重复项 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/">删除有序数组中的重复项 II</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int l = 2;</span><br><span class="line">        if(nums.size() &lt; 3) return nums.size();</span><br><span class="line">        for(int r = 2; r &lt; nums.size(); r++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[r] != nums[l - 2])</span><br><span class="line">                nums[l++] = nums[r];</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="删除有序数组中的重复项-II"><a href="#删除有序数组中的重复项-II" class="headerlink" title="删除有序数组中的重复项 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/">删除有序数组中的重复项 II</a></h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">int</span> removeDuplicates(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums) &#123;<br>        <span class="hljs-built_in">int</span> l = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() &lt; <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> nums.<span class="hljs-built_in">size</span>();<br>        for(<span class="hljs-built_in">int</span> r = <span class="hljs-number">2</span>; r &lt; nums.<span class="hljs-built_in">size</span>(); r++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums[r] <span class="hljs-comment">!= nums[l - 2])</span><br>                nums[l++] = nums[r];<br>        &#125;<br>        <span class="hljs-keyword">return</span> l;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h4 id="总结2"><a href="#总结2" class="headerlink" title="总结2"></a>总结2</h4><p>都使用快慢指针，但当允许有两个重复值时，应该比较的是 <strong>快指针和慢指针-2</strong>，<strong>而不是 快指针和快指针-2</strong>，因为快慢指针都被初始化为2，当相等时，则快指针（&#x3D;慢指针）当前值多余，快指针继续遍历；遍历至当快指针遇到与慢指针-2不相等时，则可以将快指针的值赋值到慢指针，此时慢指针 &#x3D; 慢指针 - 1 &#x3D; 慢指针 - 2，需要删除的是慢指针而不是快指针。</p>
 <p>同理，I中也可以将判断条件改为<code>if(nums[r] != nums[l - 1])</code>，也可以延伸到重复项数量为k</p>
 <h3 id="长度最小的子数组"><a href="#长度最小的子数组" class="headerlink" title=" 长度最小的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/"> 长度最小的子数组</a></h3><p>右指针遍历整个数组，并不断扩大窗口，直至满足条件后，while循环中不断缩小窗口并更新结果，维持动态窗口满足条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        long long sum = 0;</span><br><span class="line">        int i = 0;</span><br><span class="line">        int res = nums.size() + 1;</span><br><span class="line">        for(int j = 0; j &lt; nums.size(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            while(sum &gt;= target)</span><br><span class="line">            &#123;</span><br><span class="line">                res = min(res, j - i + 1);</span><br><span class="line">                sum -= nums[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res == nums.size() + 1? 0 : res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">int</span> minSubArrayLen(<span class="hljs-built_in">int</span> <span class="hljs-keyword">target</span>, vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums) &#123;<br>        long long <span class="hljs-built_in">sum</span> = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">int</span> res = nums.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>;<br>        for(<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; nums.<span class="hljs-built_in">size</span>(); j++)<br>        &#123;<br>            <span class="hljs-built_in">sum</span> += nums[j];<br>            <span class="hljs-keyword">while</span>(<span class="hljs-built_in">sum</span> &gt;= <span class="hljs-keyword">target</span>)<br>            &#123;<br>                res = <span class="hljs-built_in">min</span>(res, j - i + <span class="hljs-number">1</span>);<br>                <span class="hljs-built_in">sum</span> -= nums[i];<br>                i++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res == nums.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>? <span class="hljs-number">0</span> : res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h3 id="最小覆盖子串"><a href="#最小覆盖子串" class="headerlink" title=" 最小覆盖子串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/"> 最小覆盖子串</a></h3><p>同样地，右指针遍历整个数组，而左指针不断缩小窗口，同时更新结果。此外，需要用哈希表记录窗口的访问记录并判断是否符合条件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    unordered_map&lt;char, int&gt; store, vis;</span><br><span class="line"></span><br><span class="line">    bool check()</span><br><span class="line">    &#123;</span><br><span class="line">        for (const auto &amp; it : store)</span><br><span class="line">        &#123;</span><br><span class="line">            if ((vis.find(it.first) == vis.end()) || (vis.find(it.first) != vis.end() &amp;&amp; vis[it.first] &lt; it.second))</span><br><span class="line">                return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    string minWindow(string s, string t) &#123;</span><br><span class="line"></span><br><span class="line">        for (auto c : t)</span><br><span class="line">        &#123;</span><br><span class="line">            store[c]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int i = 0, j = 0;</span><br><span class="line">        int res = s.size() + 1;</span><br><span class="line">        int ind = i;</span><br><span class="line">        while (j &lt; s.size())</span><br><span class="line">        &#123;</span><br><span class="line">            vis[s[j]]++;</span><br><span class="line">            while (check()) // 已覆盖t字符串，则尝试缩小左边范围</span><br><span class="line">            &#123;</span><br><span class="line">                if(res &gt; j - i + 1)</span><br><span class="line">                &#123;</span><br><span class="line">                    res = j - i + 1;</span><br><span class="line">                    ind = i;</span><br><span class="line">                &#125;</span><br><span class="line">                vis[s[i++]]--;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        return res == s.size() + 1 ? &quot;&quot; : s.substr(ind, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    unordered_map&lt;<span class="hljs-type">char</span>, <span class="hljs-type">int</span>&gt; store, vis;<br><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp; it : store)<br>        &#123;<br>            <span class="hljs-keyword">if</span> ((vis.<span class="hljs-built_in">find</span>(it.first) == vis.<span class="hljs-built_in">end</span>()) || (vis.<span class="hljs-built_in">find</span>(it.first) != vis.<span class="hljs-built_in">end</span>() &amp;&amp; vis[it.first] &lt; it.second))<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-function">string <span class="hljs-title">minWindow</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : t)<br>        &#123;<br>            store[c]++;<br>        &#125;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> res = s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> ind = i;<br>        <span class="hljs-keyword">while</span> (j &lt; s.<span class="hljs-built_in">size</span>())<br>        &#123;<br>            vis[s[j]]++;<br>            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">check</span>()) <span class="hljs-comment">// 已覆盖t字符串，则尝试缩小左边范围</span><br>            &#123;<br>                <span class="hljs-keyword">if</span>(res &gt; j - i + <span class="hljs-number">1</span>)<br>                &#123;<br>                    res = j - i + <span class="hljs-number">1</span>;<br>                    ind = i;<br>                &#125;<br>                vis[s[i++]]--;<br>            &#125;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res == s.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span> ? <span class="hljs-string">&quot;&quot;</span> : s.<span class="hljs-built_in">substr</span>(ind, res);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="水果成篮"><a href="#水果成篮" class="headerlink" title="水果成篮"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/">水果成篮</a></h3><p>同样，右指针遍历数组，并扩大窗口，在不满足条件后，左指针不断缩小窗口，直至满足条件后更新结果。另外，还需要用哈希表来判断</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int totalFruit(vector&lt;int&gt;&amp; fruits) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        unordered_map&lt;int, int&gt; vis;</span><br><span class="line">        int i = 0;</span><br><span class="line">        for(int j = 0; j &lt; fruits.size(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            vis[fruits[j]]++;</span><br><span class="line">            while(vis.size() &gt; 2)</span><br><span class="line">            &#123;</span><br><span class="line">                vis[fruits[i]]--;</span><br><span class="line">                if(vis[fruits[i]] == 0)</span><br><span class="line">                    vis.erase(fruits[i]);</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            res = max(res, j - i + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">totalFruit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; fruits)</span> </span>&#123;<br>        <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>        unordered_map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; vis;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; fruits.<span class="hljs-built_in">size</span>(); j++)<br>        &#123;<br>            vis[fruits[j]]++;<br>            <span class="hljs-keyword">while</span>(vis.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">2</span>)<br>            &#123;<br>                vis[fruits[i]]--;<br>                <span class="hljs-keyword">if</span>(vis[fruits[i]] == <span class="hljs-number">0</span>)<br>                    vis.<span class="hljs-built_in">erase</span>(fruits[i]);<br>                i++;<br>            &#125;<br>            res = <span class="hljs-built_in">max</span>(res, j - i + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h3 id="无重复字符的最长子串"><a href="#无重复字符的最长子串" class="headerlink" title="无重复字符的最长子串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">无重复字符的最长子串</a></h3><p>同样地思路，右指针不断扩大窗口，为了在扩大的时候不重复包含已有的元素，在添加元素到窗口之前把窗口中已有的对应元素删除掉，即左指针缩小窗口的过程，然后再更新结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int lengthOfLongestSubstring(string s) &#123;</span><br><span class="line">        int j = 0 , i = 0;</span><br><span class="line">        int res = 0;</span><br><span class="line">        unordered_set&lt;char&gt; store;</span><br><span class="line">        for(j; j &lt; s.size(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            while(store.find(s[j]) != store.end())// 如果出现重复则先删除</span><br><span class="line">            &#123;</span><br><span class="line">                store.erase(s[i++]);</span><br><span class="line">            &#125;</span><br><span class="line">            if(store.find(s[j]) == store.end()) // 没有重复则加入</span><br><span class="line">                store.insert(s[j]);</span><br><span class="line">            res = max(res, j - i + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span> , i = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>        unordered_set&lt;<span class="hljs-type">char</span>&gt; store;<br>        <span class="hljs-keyword">for</span>(j; j &lt; s.<span class="hljs-built_in">size</span>(); j++)<br>        &#123;<br>            <span class="hljs-keyword">while</span>(store.<span class="hljs-built_in">find</span>(s[j]) != store.<span class="hljs-built_in">end</span>())<span class="hljs-comment">// 如果出现重复则先删除</span><br>            &#123;<br>                store.<span class="hljs-built_in">erase</span>(s[i++]);<br>            &#125;<br>            <span class="hljs-keyword">if</span>(store.<span class="hljs-built_in">find</span>(s[j]) == store.<span class="hljs-built_in">end</span>()) <span class="hljs-comment">// 没有重复则加入</span><br>                store.<span class="hljs-built_in">insert</span>(s[j]);<br>            res = <span class="hljs-built_in">max</span>(res, j - i + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h4 id="总结3"><a href="#总结3" class="headerlink" title="总结3"></a>总结3</h4><p><u>水果成篮和无重复字符的最长子串所求的是<strong>最大窗口长度</strong></u>，<u>而长度最小的子数组和最小覆盖子串求的是<strong>最小窗口长度</strong></u>，因此同样的遍历循环下，要在不同位置对结果进行更新，即求最大窗口长度时要在<strong>左指针</strong>遍历结束后更新，求最小窗口长度则是在<strong>右指针</strong>遍历过程中更新</p>
-<h2 id="双指针——固定窗口"><a href="#双指针——固定窗口" class="headerlink" title="双指针——固定窗口"></a>双指针——固定窗口</h2><h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><h3 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title=" 螺旋矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/"> 螺旋矩阵</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        int m = matrix.size(), n = matrix[0].size();</span><br><span class="line">        int up = 0, down = m-1, left = 0, right = n-1;</span><br><span class="line">        while (up &lt;= down &amp;&amp; left &lt;= right)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j = left; j &lt;= right; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(matrix[up][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            up++;</span><br><span class="line">            for (int i = up; i &lt;= down; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(matrix[i][right]);</span><br><span class="line">            &#125;</span><br><span class="line">            right--;</span><br><span class="line">            if(up &gt; down || left &gt; right)</span><br><span class="line">                break;</span><br><span class="line">            for (int j = right; j &gt;= left; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(matrix[down][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            down--;</span><br><span class="line">            for (int i = down; i &gt;= up; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                res.push_back(matrix[i][left]);</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="双指针——固定窗口"><a href="#双指针——固定窗口" class="headerlink" title="双指针——固定窗口"></a>双指针——固定窗口</h2><h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><h3 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title=" 螺旋矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/"> 螺旋矩阵</a></h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;<br>public:<br>    vector&lt;<span class="hljs-built_in">int</span>&gt; spiral<span class="hljs-constructor">Order(<span class="hljs-params">vector</span>&lt;<span class="hljs-params">vector</span>&lt;<span class="hljs-params">int</span>&gt;&gt;&amp; <span class="hljs-params">matrix</span>)</span> &#123;<br>        vector&lt;<span class="hljs-built_in">int</span>&gt; res;<br>        <span class="hljs-built_in">int</span> m = matrix.size<span class="hljs-literal">()</span>, n = matrix<span class="hljs-literal">[<span class="hljs-number">0</span>]</span>.size<span class="hljs-literal">()</span>;<br>        <span class="hljs-built_in">int</span> up = <span class="hljs-number">0</span>, down = m-<span class="hljs-number">1</span>, left = <span class="hljs-number">0</span>, right = n-<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (up &lt;= down<span class="hljs-operator"> &amp;&amp; </span>left &lt;= right)<br>        &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = left; j &lt;= right; j++)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">matrix</span>[<span class="hljs-params">up</span>][<span class="hljs-params">j</span>])</span>;<br>            &#125;<br>            up++;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = up; i &lt;= down; i++)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">matrix</span>[<span class="hljs-params">i</span>][<span class="hljs-params">right</span>])</span>;<br>            &#125;<br>            right--;<br>            <span class="hljs-keyword">if</span>(up &gt; down<span class="hljs-operator"> || </span>left &gt; right)<br>                break;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = right; j &gt;= left; j--)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">matrix</span>[<span class="hljs-params">down</span>][<span class="hljs-params">j</span>])</span>;<br>            &#125;<br>            down--;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = down; i &gt;= up; i--)<br>            &#123;<br>                res.push<span class="hljs-constructor">_back(<span class="hljs-params">matrix</span>[<span class="hljs-params">i</span>][<span class="hljs-params">left</span>])</span>;<br>            &#125;<br>            left++;<br>        &#125;<br>        return res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h3 id="螺旋矩阵-II"><a href="#螺旋矩阵-II" class="headerlink" title="螺旋矩阵 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">螺旋矩阵 II</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) &#123;</span><br><span class="line">        int cnt = n * n;</span><br><span class="line">        int tmp = 1;</span><br><span class="line">        int up = 0, down = n - 1, left = 0, right = n - 1;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res(n, vector&lt;int&gt;(n));</span><br><span class="line">        while (tmp &lt;= cnt)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j = left; j &lt;= right; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                res[up][j] = tmp++;</span><br><span class="line">            &#125;</span><br><span class="line">            up++;</span><br><span class="line">            for (int i = up; i &lt;= down; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                res[i][right] = tmp++;</span><br><span class="line">            &#125;</span><br><span class="line">            right--;</span><br><span class="line">            if (tmp &gt; cnt)</span><br><span class="line">                break;</span><br><span class="line">            for (int j = right; j &gt;= left; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                res[down][j] = tmp++;</span><br><span class="line">            &#125;</span><br><span class="line">            down--;</span><br><span class="line">            for (int i = down; i &gt;= up; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                res[i][left] = tmp++;</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="螺旋矩阵-II"><a href="#螺旋矩阵-II" class="headerlink" title="螺旋矩阵 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">螺旋矩阵 II</a></h3><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs excel">class Solution &#123;<br>publ<span class="hljs-symbol">ic:</span><br>    vector&lt;vector&lt;<span class="hljs-built_in">int</span>&gt;&gt; generateMatrix(<span class="hljs-built_in">int</span> <span class="hljs-built_in">n</span>) &#123;<br>        <span class="hljs-built_in">int</span> cnt = <span class="hljs-built_in">n</span> * <span class="hljs-built_in">n</span>;<br>        <span class="hljs-built_in">int</span> tmp = <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> up = <span class="hljs-number">0</span>, down = <span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>, <span class="hljs-built_in">left</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">right</span> = <span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>;<br>        vector&lt;vector&lt;<span class="hljs-built_in">int</span>&gt;&gt; res(<span class="hljs-built_in">n</span>, vector&lt;<span class="hljs-built_in">int</span>&gt;(<span class="hljs-built_in">n</span>));<br>        while (tmp &lt;= cnt)<br>        &#123;<br>            for (<span class="hljs-built_in">int</span> j = <span class="hljs-built_in">left</span>; j &lt;= <span class="hljs-built_in">right</span>; j++)<br>            &#123;<br>                res[up][j] = tmp++;<br>            &#125;<br>            up++;<br>            for (<span class="hljs-built_in">int</span> i = up; i &lt;= down; i++)<br>            &#123;<br>                res[i][<span class="hljs-built_in">right</span>] = tmp++;<br>            &#125;<br>            <span class="hljs-built_in">right</span>--;<br>            <span class="hljs-built_in">if</span> (tmp &gt; cnt)<br>                break;<br>            for (<span class="hljs-built_in">int</span> j = <span class="hljs-built_in">right</span>; j &gt;= <span class="hljs-built_in">left</span>; j--)<br>            &#123;<br>                res[down][j] = tmp++;<br>            &#125;<br>            down--;<br>            for (<span class="hljs-built_in">int</span> i = down; i &gt;= up; i--)<br>            &#123;<br>                res[i][<span class="hljs-built_in">left</span>] = tmp++;<br>            &#125;<br>            <span class="hljs-built_in">left</span>++;<br>        &#125;<br>        return res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Leetcode数组章节</div>
+      <div>https://kevin346-sc.github.io/2023/04/24/Leetcode数组章节/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Kevin Huang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/17/LeetCode%E9%93%BE%E8%A1%A8%E7%AB%A0%E8%8A%82/" title="LeetCode链表章节">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode链表章节</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/24/create_blog/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
 
 
     </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2023/04/24/create_blog/" rel="prev" title="">
-                  <i class="fa fa-chevron-left"></i> 
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2023/05/17/LeetCode%E9%93%BE%E8%A1%A8%E7%AB%A0%E8%8A%82/" rel="next" title="LeetCode链表章节">
-                  LeetCode链表章节 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
+  </div>
 </div>
 
 
 
 
 
+  
 
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+    
+
+    
   </main>
 
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Kevin Huang</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
+  
+  
+  
+</div>
+
   </footer>
 
+  <!-- Scripts -->
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
 
 
   
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
